@@ -88,7 +88,7 @@ public class HtS extends JavaPlugin {
 		getCommand("players").setExecutor(new Commands(this));
 		getCommand("random").setExecutor(new Commands(this));
 		
-		System.out.println("rt");
+		System.out.println("rts");
 		
 	}
 
