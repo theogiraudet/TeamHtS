@@ -87,9 +87,6 @@ public class HtS extends JavaPlugin {
 		getCommand("broadcast").setExecutor(new Commands(this));
 		getCommand("players").setExecutor(new Commands(this));
 		getCommand("random").setExecutor(new Commands(this));
-		
-		System.out.println("rt");
-		
 	}
 
 	public void onDisable() {

@@ -1,9 +1,8 @@
 package fr.theogiraudet.HtS.Commands;
 
-import java.util.Random;
-import java.util.UUID;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -23,6 +22,7 @@ import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.Inventaire;
+import fr.theogiraudet.HtS.Objects.Randomizer;
 
 public class Commands implements CommandExecutor {
 	
@@ -125,15 +125,14 @@ public class Commands implements CommandExecutor {
 			} else if(cmd.getName().equalsIgnoreCase("random") && sender.hasPermission("random.use")) {
 				int x, z, isNegative;
 				int negative[] = {-1,1};
-				Random r = new Random();
 				World world = Bukkit.getWorld("world");
 				WorldBorder border = world.getWorldBorder();
 				
-				isNegative = negative[1 - r.nextInt(negative.length)];
-				x = isNegative * (0 + r.nextInt((int) Math.floor(border.getSize()/2 - 0)));
+				isNegative = negative[1 - Randomizer.Rand(negative.length)];
+				x = isNegative * (0 + Randomizer.Rand((int) Math.floor(border.getSize()/2 - 0)));
 				
-				isNegative = negative[1 - r.nextInt(negative.length)];
-				z = isNegative * (0 + r.nextInt((int) Math.floor(border.getSize()/2 - 0)));
+				isNegative = negative[1 - Randomizer.Rand(negative.length)];
+				z = isNegative * (0 + Randomizer.Rand((int) Math.floor(border.getSize()/2 - 0)));
 				sender.sendMessage(x + " " + z);
 				
 			}

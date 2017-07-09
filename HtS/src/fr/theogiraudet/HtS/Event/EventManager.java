@@ -3,7 +3,6 @@ package fr.theogiraudet.HtS.Event;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -54,6 +53,7 @@ import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Objects.DeathEntityLoot;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
+import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.Team;
 
 public class EventManager implements Listener {
@@ -85,19 +85,15 @@ public class EventManager implements Listener {
     public void onShulkerDeathInNether(EntityDeathEvent e){
         if(e.getEntityType() == EntityType.SHULKER){
         	ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
-        	Random random = new Random();
-        	int randb;
             e.getDrops().clear();
-            randb = random.nextInt(100);
-            if(randb < 15){
+            if(Randomizer.RandRate(15)){
                 ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
                 EnchantmentStorageMeta esm = (EnchantmentStorageMeta) book.getItemMeta();
                 esm.addStoredEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
                 book.setItemMeta(esm);
                 drops.add(book);
             }
-            randb = random.nextInt(100);
-            if(randb < 25) {
+            if(Randomizer.RandRate(25)) {
             	drops.add(new ItemStackManager(Material.SHULKER_SHELL, (short) 0, 1, "§rShulker Shell", "A un pourcentage de chance de bloquer un coup. 3 utilisations.").getItemStack());
             }
             e.getDrops().addAll(drops);
@@ -108,10 +104,8 @@ public class EventManager implements Listener {
 	public void onDamage(EntityDamageByEntityEvent e) {
 		if(e.getEntity() instanceof Player && ((Player) e.getEntity()).getInventory().contains(Material.SHULKER_SHELL)) {
 			Player p = (Player) e.getEntity();
-			Random r = new Random();
-			int rand = r.nextInt(100);
 			World world = p.getWorld();
-			if(rand < 63) {
+			if(Randomizer.RandRate(63)) {
 				if(shellUse.containsKey(p)) {
 					shellUse.replace(p, shellUse.get(p) + 1);
 					if(shellUse.get(p) == 3) {
@@ -349,9 +343,7 @@ public class EventManager implements Listener {
 	public void onBlockBreak(BlockBreakEvent e) {
 		Block b = e.getBlock();
 		if (b.getType() == Material.GRAVEL) {
-			Random r = new Random();
-			int rate = r.nextInt(100);
-			if (rate <= 20) {
+			if (Randomizer.RandRate(21)) {
 				e.setCancelled(true);
 				b.setType(Material.AIR);
 				b.getLocation().getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.FLINT));
@@ -365,15 +357,13 @@ public class EventManager implements Listener {
 				|| ((b.getType() == Material.LEAVES_2) && (b.getData() == 1)) || (b.getData() == 5)
 				|| (b.getData() == 13)) {
 			
-			Random r = new Random();
-			int rate = r.nextInt(100);
 			if (e.getPlayer().getInventory().getItemInMainHand().getType() != Material.WOOD_HOE
 					&& e.getPlayer().getInventory().getItemInMainHand().getType() != Material.STONE_HOE
 					&& e.getPlayer().getInventory().getItemInMainHand().getType() != Material.GOLD_HOE
 					&& e.getPlayer().getInventory().getItemInMainHand().getType() != Material.IRON_HOE
 					&& e.getPlayer().getInventory().getItemInMainHand().getType() != Material.DIAMOND_HOE) {
 				
-				if (rate <= 2) {
+				if (Randomizer.RandRate(3)) {
 					e.setCancelled(true);
 					b.setType(Material.AIR);
 					b.getLocation().getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.APPLE));
@@ -382,7 +372,7 @@ public class EventManager implements Listener {
 					b.setType(Material.AIR);
 				}
 			} else {
-				if (rate <= 4) {
+				if (Randomizer.RandRate(5)) {
 					e.setCancelled(true);
 					b.setType(Material.AIR);
 					b.getLocation().getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.APPLE));
@@ -399,9 +389,7 @@ public class EventManager implements Listener {
 		Entity en = e.getEntity();
 		if ((en instanceof Ghast)) {
 			e.getDrops().clear();
-			Random r = new Random();
-			int rate = r.nextInt(100);
-			if (rate <= 50) {
+			if (Randomizer.RandRate(51)) {
 				en.getWorld().dropItemNaturally(en.getLocation(), new ItemStack(Material.GOLD_BLOCK, 1));
 			} else {
 				en.getWorld().dropItemNaturally(en.getLocation(), new ItemStack(Material.GOLD_INGOT, 1));
@@ -416,9 +404,7 @@ public class EventManager implements Listener {
 		if (((b.getType() == Material.LEAVES) && ((b.getData() == 0) || (b.getData() == 4) || (b.getData() == 12)))
 				|| ((b.getType() == Material.LEAVES_2) && (b.getData() == 1)) || (b.getData() == 5)
 				|| (b.getData() == 13)) {
-			Random r = new Random();
-			int rate = r.nextInt(100);
-			if (rate <= 2) {
+			if (Randomizer.RandRate(3)) {
 				e.setCancelled(true);
 				b.setType(Material.AIR);
 				b.getLocation().getWorld().dropItemNaturally(b.getLocation(), new ItemStack(Material.APPLE));
@@ -434,11 +420,9 @@ public class EventManager implements Listener {
 		Player p = e.getPlayer();
 		Block b = e.getBlockClicked();
 		if (b.getType() == Material.STATIONARY_WATER) {
-			Random r = new Random();
-			int rate = r.nextInt(100);
-			if (rate == 1) {
+			if (Randomizer.RandRate(2)) {
 				p.getInventory().addItem(new ItemStack(Material.GOLD_NUGGET, 1));
-			} else if (rate == 2) {
+			} else if (Randomizer.RandRate(3)) {
 				p.getInventory().addItem(new ItemStack(Material.IRON_NUGGET, 1));
 			}
 		}

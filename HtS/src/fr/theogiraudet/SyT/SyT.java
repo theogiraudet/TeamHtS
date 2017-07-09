@@ -2,7 +2,6 @@ package fr.theogiraudet.SyT;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -22,6 +21,7 @@ import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Timer;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Objects.ActionBar;
+import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.Team;
 
 public class SyT implements Listener, CommandExecutor {
@@ -51,10 +51,9 @@ public class SyT implements Listener, CommandExecutor {
 		int security = 0;
 		
 		while(SyT.players.size() > 0) {
-			Random r = new Random();
 			int rand = 0;
 			if(SyT.players.size()  != 0) {
-				rand = r.nextInt(SyT.players.size());
+				rand = Randomizer.Rand(SyT.players.size());
 			} else {
 				rand = 0;
 			}
