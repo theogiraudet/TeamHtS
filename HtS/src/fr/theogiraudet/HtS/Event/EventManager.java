@@ -37,6 +37,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
@@ -46,6 +47,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.theogiraudet.HtS.BiomeMutator;
+import fr.theogiraudet.HtS.BonusChest;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Commands.Start;
@@ -71,6 +73,10 @@ public class EventManager implements Listener {
 		this.main = htS;
 	}
 
+	@EventHandler
+	public void test(PlayerEggThrowEvent e) {
+		BonusChest.setBonusChest();
+	}
 	
 	@EventHandler
     public void onNetherLoad(PlayerChangedWorldEvent e) throws InterruptedException{

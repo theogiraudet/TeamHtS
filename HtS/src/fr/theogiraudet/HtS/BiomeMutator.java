@@ -48,49 +48,45 @@ public class BiomeMutator{
 				}
 				if(!wart){
 					for(int i = 0; i < 500000; i++){
-						int[] coords = Randomizer.RandCoord(cx, cx+16, cz, cz+16, 50, 100);
-						x = coords[0];
-						z = coords[1];
-						y = coords[2];
+						int[] coords = Randomizer.RandCoord(cx, cx+16, cz, cz+16, 50, 100);						
+						ybc = coords[1]-1;
+						ytc = coords[1]+1;
+						xlc = coords[0]-1;
+						xrc = coords[0]+1;
+						zlc = coords[2]-1;
+						zrc = coords[2]+1;
 						
-						ybc = y-1;
-						ytc = y+1;
-						xlc = x-1;
-						xrc = x+1;
-						zlc = z-1;
-						zrc = z+1;
-						
-						if (w.getBlockAt(x, y, z).getType() == Material.AIR
-								&& w.getBlockAt(x, ytc, z).getType() == Material.AIR
-								&& w.getBlockAt(x, ybc, z).getType() != Material.AIR
-								&& w.getBlockAt(x, ybc, z).getType() != Material.LAVA
-								&& w.getBlockAt(x, ybc, z).getType() != Material.NETHER_BRICK
-								&& w.getBlockAt(x, ybc, z).getType() != Material.NETHER_BRICK_STAIRS
-								&& w.getBlockAt(x, ybc, z).getType() != Material.NETHER_FENCE
-								&& w.getBlockAt(x, ybc, z).getType() != Material.STEP
+						if (w.getBlockAt(coords[0], coords[1], coords[2]).getType() == Material.AIR
+								&& w.getBlockAt(coords[0], ytc, coords[2]).getType() == Material.AIR
+								&& w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.AIR
+								&& w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.LAVA
+								&& w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.NETHER_BRICK
+								&& w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.NETHER_BRICK_STAIRS
+								&& w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.NETHER_FENCE
+								&& w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.STEP
 								&& !netherwart){
-							Location lb = new Location(w,x,ybc,z);
-							Location lt = new Location(w,x,y,z);
+							Location lb = new Location(w,coords[0],ybc,coords[2]);
+							Location lt = new Location(w,coords[0],coords[1],coords[2]);
 							
 							lb.getBlock().setType(Material.SOUL_SAND);
 							lt.getBlock().setType(Material.NETHER_WARTS);
 							lt.getBlock().setData((byte) 3);
 							netherwart = true;
 						}
-						else if (w.getBlockAt(x, y, z).getType() == Material.AIR
-								&& ((w.getBlockAt(x, ybc, z).getType() != Material.AIR
-										&& w.getBlockAt(x, ytc, z).getType() == Material.AIR
-										&& w.getBlockAt(xlc, y, z).getType() == Material.AIR
-										&& w.getBlockAt(xrc, y, z).getType() == Material.AIR
-										&& w.getBlockAt(x, y, zlc).getType() == Material.AIR
-										&& w.getBlockAt(x, y, zrc).getType() == Material.AIR)
-										|| (w.getBlockAt(x, ybc, z).getType() == Material.AIR
-												&& w.getBlockAt(x, ytc, z).getType() != Material.AIR
-												&& w.getBlockAt(xlc, y, z).getType() == Material.AIR
-												&& w.getBlockAt(xrc, y, z).getType() == Material.AIR
-												&& w.getBlockAt(x, y, zlc).getType() == Material.AIR
-												&& w.getBlockAt(x, y, zrc).getType() == Material.AIR)) && !shulker){
-							Shulker sh = (Shulker) (w.spawnEntity(new Location(w,x,y,z), EntityType.SHULKER));
+						else if (w.getBlockAt(coords[0], coords[1], coords[2]).getType() == Material.AIR
+								&& ((w.getBlockAt(coords[0], ybc, coords[2]).getType() != Material.AIR
+										&& w.getBlockAt(coords[0], ytc, coords[2]).getType() == Material.AIR
+										&& w.getBlockAt(xlc, coords[1], coords[2]).getType() == Material.AIR
+										&& w.getBlockAt(xrc, coords[1], coords[2]).getType() == Material.AIR
+										&& w.getBlockAt(coords[0], coords[1], zlc).getType() == Material.AIR
+										&& w.getBlockAt(coords[0], coords[1], zrc).getType() == Material.AIR)
+										|| (w.getBlockAt(coords[0], ybc, coords[2]).getType() == Material.AIR
+												&& w.getBlockAt(coords[0], ytc, coords[2]).getType() != Material.AIR
+												&& w.getBlockAt(xlc, coords[1], coords[2]).getType() == Material.AIR
+												&& w.getBlockAt(xrc, coords[1], coords[2]).getType() == Material.AIR
+												&& w.getBlockAt(coords[0], coords[1], zlc).getType() == Material.AIR
+												&& w.getBlockAt(coords[0], coords[1], zrc).getType() == Material.AIR)) && !shulker){
+							Shulker sh = (Shulker) (w.spawnEntity(new Location(w,coords[0],coords[1],coords[2]), EntityType.SHULKER));
 							sh.setColor(DyeColor.RED);
 							shulker = true;
 						}

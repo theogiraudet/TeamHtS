@@ -30,8 +30,8 @@ public class Randomizer{
     
     public static  int[] RandCoord(int mx, int Mx,int mz,int Mz,int my,int My){
         coords[0] = RandI(mx, Mx);
-        coords[1] = RandI(mz, Mz);
-        coords[2] = RandI(my, My);
+        coords[1] = RandI(my, My);
+        coords[2] = RandI(mz, Mz);
         return coords;
     }    
 }

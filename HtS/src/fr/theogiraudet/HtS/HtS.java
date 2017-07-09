@@ -22,6 +22,7 @@ import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.DisableCraft;
 import fr.theogiraudet.HtS.Event.EventManager;
 import fr.theogiraudet.HtS.Event.Inventaire;
+import fr.theogiraudet.HtS.Event.MobFriendEvent;
 import fr.theogiraudet.HtS.Event.NoHeal;
 import fr.theogiraudet.HtS.Objects.PlayersInGame;
 import fr.theogiraudet.HtS.Objects.Team;
@@ -71,7 +72,7 @@ public class HtS extends JavaPlugin {
 		pm.registerEvents(new DisableCraft(this), this);
 		pm.registerEvents(new SyT(this), this);
 		pm.registerEvents(new Spectator(this), this);
-		pm.registerEvents(new SelectMod(this), this);
+		pm.registerEvents(new MobFriendEvent(this), this);
 		
 		getCommand("start").setExecutor(new Start(this));
 		getCommand("team").setExecutor(new TeamCommand(this));
@@ -87,13 +88,10 @@ public class HtS extends JavaPlugin {
 		getCommand("broadcast").setExecutor(new Commands(this));
 		getCommand("players").setExecutor(new Commands(this));
 		getCommand("random").setExecutor(new Commands(this));
-<<<<<<< HEAD
-=======
+
 		
 		System.out.println("rts");
-		
->>>>>>> branch 'master' of https://github.com/theogiraudet/TeamHtS.git
-	}
+}
 
 	public void onDisable() {
 		
