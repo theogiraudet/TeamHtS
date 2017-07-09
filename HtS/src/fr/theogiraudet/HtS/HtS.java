@@ -90,7 +90,6 @@ public class HtS extends JavaPlugin {
 		getCommand("random").setExecutor(new Commands(this));
 
 		
-		System.out.println("rts");
 }
 
 	public void onDisable() {
