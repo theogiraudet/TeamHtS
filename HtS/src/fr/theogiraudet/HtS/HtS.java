@@ -87,12 +87,7 @@ public class HtS extends JavaPlugin {
 		getCommand("broadcast").setExecutor(new Commands(this));
 		getCommand("players").setExecutor(new Commands(this));
 		getCommand("random").setExecutor(new Commands(this));
-<<<<<<< HEAD
-=======
 		
-		System.out.println("rts");
-		
->>>>>>> branch 'master' of https://github.com/theogiraudet/TeamHtS.git
 	}
 
 	public void onDisable() {
