@@ -1,0 +1,47 @@
+name: HtS
+version: 1.0
+authors: [theogiraudet, zertus, ikbrunel] 
+main: fr.theogiraudet.HtS.HtS
+commands: 
+ start:
+  description: Lance le jeu.
+  usage: Erreur syntaxe ! Faites /start
+ team: 
+  description: Commandes relatives aux teams.
+  usage: Erreur syntaxe ! Faites /team <add|remove|list|give|teamhit> [<true|false>|<nom <IGColor WoolColor>>] 
+ option: 
+  description: Ouvrir le menu des options.
+  usage: Erreur syntaxe ! Faites /option 
+ res: 
+  description: Res un joueur.
+  usage: Erreur syntaxe ! Faites /res <joueur>
+ remove: 
+  description: Retire un joueur de la partie.
+  usage: Erreur syntaxe ! Faites /remove <joueur>
+ spectate: 
+  description: Permet de se mettre en spectateur.
+  usage: Erreur syntaxe ! Faites /spectate
+ huntlist:
+  description: Affiche les cibles de chaque joueur.
+  usage: Erreur syntaxe ! Faites /huntlist
+ cible: 
+  description: Affiche votre cible.
+  usage: Erreur syntaxe ! Faites /cible
+ heal: 
+  description: Heal un joueur.
+  usage: Erreur syntaxe ! Faites /heal <joueur>
+ feed: 
+  description: Rassasie un joueur.
+  usage: Erreur syntaxe ! Faites/feed <joueur>
+ broadcast: 
+  description: Alerte les joueurs
+  usage: Erreur syntaxe ! Faites /broadcast <message>
+ radar:
+  description: Envoie le title des radars.
+  usage: Erreur syntaxe ! Faites /title <1|2|3>
+ players:
+  description: Liste les joueurs participants (console).
+  usage: Erreur syntaxe ! Faites /players
+ random:
+  description: Donne un x et un y random de la map.
+  usage: Erreur syntaxe ! Faites /random
