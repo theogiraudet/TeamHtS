@@ -9,6 +9,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Shulker;
 
+import fr.theogiraudet.HtS.Objects.Randomizer;
+
 public class BiomeMutator{
 	
 	private boolean wart = false;

@@ -1,4 +1,4 @@
-package fr.theogiraudet.HtS;
+package fr.theogiraudet.HtS.Objects;
 
 
 import java.util.Random;
@@ -9,7 +9,11 @@ public class Randomizer{
     private static boolean state = false;
     private static int coords[] = new int[3];
     
-    public static int Rand(int min, int max){    
+    public static int Rand(int n) {
+        return random.nextInt(n);
+    }
+    
+    public static int RandI(int min, int max){    
         return random.nextInt(max+1-min)+min;
     }
     
@@ -25,9 +29,9 @@ public class Randomizer{
     }
     
     public static  int[] RandCoord(int mx, int Mx,int mz,int Mz,int my,int My){
-        coords[0] = Rand(mx, Mx);
-        coords[1] = Rand(mz, Mz);
-        coords[2] = Rand(my, My);
+        coords[0] = RandI(mx, Mx);
+        coords[1] = RandI(mz, Mz);
+        coords[2] = RandI(my, My);
         return coords;
     }    
 }
