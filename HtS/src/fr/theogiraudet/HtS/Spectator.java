@@ -45,7 +45,6 @@ public class Spectator implements Listener {
 		reloadInventory(e.getPlayer());
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	@EventHandler
 	public void onCloseInventory(InventoryCloseEvent e) {
 		String name = e.getInventory().getTitle();
@@ -104,7 +103,6 @@ public class Spectator implements Listener {
 		
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void reloadInventory(Player target) {
 		//System.out.println("Test 1 inv");
 		for(Player p : Bukkit.getOnlinePlayers()) {

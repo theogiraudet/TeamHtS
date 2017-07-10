@@ -10,7 +10,7 @@ public class OptionsActivate extends Option {
 	}
 
 	public void setGlint(boolean glint) {
-		
+
 	}
 	
 	public boolean isGlint() {
