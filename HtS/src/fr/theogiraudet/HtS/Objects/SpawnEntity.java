@@ -9,12 +9,12 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 import fr.theogiraudet.HtS.HtS;
 
-public class spawnEntity {
+public class SpawnEntity {
 	
 	private static HtS main;
 
-	public spawnEntity(HtS htS) {
-		spawnEntity.main = htS;
+	public SpawnEntity(HtS htS) {
+		SpawnEntity.main = htS;
 	}
 	
 	public static void summon(EntityType entity, World w, int x, int y, int z) {

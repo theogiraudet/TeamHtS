@@ -17,7 +17,7 @@ import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.Team;
-import fr.theogiraudet.HtS.Objects.spawnEntity;
+import fr.theogiraudet.HtS.Objects.SpawnEntity;
 import net.md_5.bungee.api.ChatColor;
 
 public class MobFriendEvent implements Listener{
@@ -44,7 +44,7 @@ public class MobFriendEvent implements Listener{
 			for(Team t : main.getTeams())
 				if(t.getTeamName() == e.getEntity().getCustomName().split(",")[0]){
 					System.out.println(e.getEntity().getCustomName().split(",")[0]);
-					spawnEntity.summon(e.getEntityType(),e.getEntity().getWorld(), e.getLocation(), e.getEntity().getCustomName().split(",")[0],false);				
+					SpawnEntity.summon(e.getEntityType(),e.getEntity().getWorld(), e.getLocation(), e.getEntity().getCustomName().split(",")[0],false);				
 			}
 		}
 	}
