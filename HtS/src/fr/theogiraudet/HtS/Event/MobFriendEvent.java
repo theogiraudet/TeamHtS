@@ -2,11 +2,7 @@ package fr.theogiraudet.HtS.Event;
 
 import java.util.ArrayList;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +17,7 @@ import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.Team;
+import fr.theogiraudet.HtS.Objects.spawnEntity;
 import net.md_5.bungee.api.ChatColor;
 
 public class MobFriendEvent implements Listener{
@@ -34,8 +31,9 @@ public class MobFriendEvent implements Listener{
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onMobTarget(EntityTargetLivingEntityEvent e){
 		if(e.getTarget() instanceof Player){
-			if(e.getEntity().getCustomName() == main.getTeam((Player) e.getTarget()).getTeamName()){	
-				e.setCancelled(true);
+			if(e.getEntity().getCustomName() != null){	
+				if(e.getEntity().getCustomName() == main.getTeam((Player) e.getTarget()).getTeamName())
+					e.setCancelled(true);
 			}
 		}	
 	}
@@ -45,13 +43,8 @@ public class MobFriendEvent implements Listener{
 		if(e.getEntity() instanceof Monster){
 			for(Team t : main.getTeams())
 				if(t.getTeamName() == e.getEntity().getCustomName().split(",")[0]){
-					World w = e.getEntity().getWorld();
-					Location l = e.getEntity().getLocation();
-					EntityType type = e.getEntityType();
-				
-					Entity mob = w.spawnEntity(l,type);
-					mob.setCustomName(e.getEntity().getCustomName().split(",")[0]);
-					mob.setCustomNameVisible(false);				
+					System.out.println(e.getEntity().getCustomName().split(",")[0]);
+					spawnEntity.summon(e.getEntityType(),e.getEntity().getWorld(), e.getLocation(), e.getEntity().getCustomName().split(",")[0],false);				
 			}
 		}
 	}

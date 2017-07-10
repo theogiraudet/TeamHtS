@@ -13,21 +13,9 @@ import fr.theogiraudet.HtS.Objects.Randomizer;
 
 public class BiomeMutator{
 	
-	private boolean wart = false;
-	private boolean netherwart = false;
-	private boolean shulker = false;	
+	private boolean wart = false, netherwart = false, shulker = false;	
 	private Player p;
-	private int cx;
-	private int cz;
-	private int x;
-	private int y;
-	private int z;
-	private int ybc;
-	private int ytc;
-	private int xlc;
-	private int xrc;
-	private int zlc;
-	private int zrc;
+	private int cx, cz, x, y, z, ybc, ytc, xlc, xrc, zlc, zrc;
 	
 	@SuppressWarnings("deprecation")
 	public BiomeMutator(Player player){	
