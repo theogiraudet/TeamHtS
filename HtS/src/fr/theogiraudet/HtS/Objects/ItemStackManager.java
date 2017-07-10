@@ -130,4 +130,8 @@ public class ItemStackManager {
 			return disableIs;
 		}
 	}
+
+	public boolean getGlint() {
+		return glint;
+	}
 }

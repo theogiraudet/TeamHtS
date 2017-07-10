@@ -57,7 +57,7 @@ public class MobFriendEvent implements Listener{
 					Player p = e.getEntity().getKiller();
 					
 					ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
-					drops.add(new ItemStackManager(Material.MONSTER_EGG, (short) e.getEntity().getEntityId(), 1, ChatColor.GREEN + main.getTeam(p).getTeamName() + ", appel à un ami", "Fait apparaître un monstre qui combattera à vos côtés (il ne vous suivera pas).").getItemStack());
+					drops.add(new ItemStackManager(Material.MONSTER_EGG, (short) e.getEntity().getEntityId(), 1, ChatColor.GREEN + main.getTeam(p).getTeamName() + ", appel à un ami", "Fait apparaître un monstre qui combattra à vos côtés (il ne vous suivera pas).").getItemStack());
 				}
 			}	
 		}

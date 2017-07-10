@@ -9,12 +9,16 @@ public class OptionsActivate extends Option {
 
 	}
 
-	public void setGlint(boolean glint) {
-
+	public void setEnable(boolean enable) {
+		if(enable) {
+			super.icon.setGlint(true);
+		} else {
+			super.icon.setGlint(false);
+		}
 	}
 	
-	public boolean isGlint() {
-		return false;
+	public boolean isEnabled() {
+		return super.icon.getGlint();
 	}
 	
 }
