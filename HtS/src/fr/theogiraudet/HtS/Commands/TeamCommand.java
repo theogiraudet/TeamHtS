@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -54,7 +55,7 @@ public class TeamCommand implements CommandExecutor, Listener {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-		if (sender instanceof Player) {
+		if (sender instanceof Player || sender instanceof BlockCommandSender) {
 
 			// && main.isState(HtSState.WAIT)
 			if (cmd.getName().equalsIgnoreCase("team") && sender.hasPermission("team.use")) {
