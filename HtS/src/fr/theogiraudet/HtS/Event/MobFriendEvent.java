@@ -22,7 +22,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class MobFriendEvent implements Listener{
 
-	public HtS main;
+	private HtS main;
 	
 	public MobFriendEvent(HtS htS) {
 		this.main = htS;
@@ -41,19 +41,23 @@ public class MobFriendEvent implements Listener{
 	@EventHandler
 	public void onMobSpawn(EntitySpawnEvent e){
 		if(e.getEntity() instanceof Monster){
+			System.out.println(e.getEntity().getCustomName());
 			for(Team t : main.getTeams())
-				if(t.getTeamName() == e.getEntity().getCustomName().split(",")[0]){
-					System.out.println(e.getEntity().getCustomName().split(",")[0]);
-					SpawnEntity.summon(e.getEntityType(),e.getEntity().getWorld(), e.getLocation(), e.getEntity().getCustomName().split(",")[0],false);				
+				if(t.getTeamName() == e.getEntity().getName().split(",")[0]){
+					SpawnEntity.summon(e.getEntityType(),e.getEntity().getWorld(), e.getLocation(), e.getEntity().getCustomName().split(",")[0],false);
 			}
 		}
 	}
 	
 	@EventHandler
 	public void onMobDeath(EntityDeathEvent e){
+		System.out.println("death");
 		if(e.getEntity() instanceof Monster){
-			if(Randomizer.RandRate(10)){
+			System.out.println("dectect monster");
+			if(Randomizer.RandRate(80)){
+				System.out.println("over rand");
 				if(e.getEntity().getKiller() instanceof Player){
+					System.out.println("killer");
 					Player p = e.getEntity().getKiller();
 					
 					ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
