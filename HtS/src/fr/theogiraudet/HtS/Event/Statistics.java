@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Objects.PluginFile;
@@ -27,7 +28,7 @@ import fr.theogiraudet.HtS.Objects.PluginFile;
 public class Statistics implements Listener{
 	
 	private HtS main;
-
+	 
 	public Statistics(HtS htS) {
 		this.main = htS;
 	}
@@ -70,9 +71,14 @@ public class Statistics implements Listener{
 	public void onPlayerPortalCross(PlayerChangedWorldEvent e) {
 		PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
 		int value = (int) f.get(e.getPlayer().getDisplayName() + ".portalcrossed");
-		value = value + 1; 
+		value++; 
 		f.set(e.getPlayer().getDisplayName() + ".portalcrossed", value);
 		f.save();
+	}
+	
+	@EventHandler
+	public void onPlayerSneak(PlayerToggleSneakEvent e) {
+		
 	}
 	
 	@EventHandler
@@ -81,7 +87,7 @@ public class Statistics implements Listener{
 			if(e.getBlock().getType() == Material.DIAMOND_ORE) {
 				PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
 				int value = (int) f.get(e.getPlayer().getDisplayName() + ".diamond");
-				value = value + 1; 
+				value++; 
 				f.set(e.getPlayer().getDisplayName() + ".diamond", value);
 				f.save();
 			}
@@ -99,7 +105,7 @@ public class Statistics implements Listener{
 	public void onItemPickup(PlayerPickupItemEvent e) {
 		PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
 		int value = (int) f.get(e.getPlayer().getDisplayName() + ".itempickedup");
-		value = value + 1; 
+		value++; 
 		f.set(e.getPlayer().getDisplayName() + ".itempickedup", value);
 		f.save();
 	}
@@ -108,7 +114,7 @@ public class Statistics implements Listener{
 	public void onEnchantment(EnchantItemEvent e) {
 		PluginFile f = new PluginFile(main, e.getEnchanter().getUniqueId().toString() + ".txt");
 		int value = (int) f.get(e.getEnchanter().getDisplayName() + ".enchantment");
-		value = value + 1; 
+		value++; 
 		f.set(e.getEnchanter().getDisplayName() + ".enchantment", value);
 		f.save();
 	}
@@ -118,14 +124,14 @@ public class Statistics implements Listener{
 		if(e.getItem().getType() == Material.GOLDEN_APPLE) {
 			PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
 			int value = (int) f.get(e.getPlayer().getDisplayName() + ".goldappleaten");
-			value = value + 1; 
+			value++; 
 			f.set(e.getPlayer().getDisplayName() + ".goldappleaten", value);
 			f.save();
 		}
 		else if(e.getItem().getType() == Material.POTION) {
 			PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
 			int value = (int) f.get(e.getPlayer().getDisplayName() + ".potiondrunk");
-			value = value + 1; 
+			value++; 
 			f.set(e.getPlayer().getDisplayName() + ".potiondrunk", value);
 			f.save();
 		}
@@ -136,7 +142,7 @@ public class Statistics implements Listener{
 		if(e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME) {
 			PluginFile f = new PluginFile(main, e.getEntity().getKiller().getUniqueId().toString() + ".txt");
 			int value = (int) f.get(e.getEntity().getKiller().getDisplayName() + ".monsterkilled");
-			value = value + 1; 
+			value++; 
 			f.set(e.getEntity().getKiller().getDisplayName() + ".monsterkilled", value);
 			f.save();
 		}
@@ -168,33 +174,33 @@ public class Statistics implements Listener{
 	public void onProjectileShot(ProjectileLaunchEvent e) {
 		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player) {
 			PluginFile f = new PluginFile(main, ((Entity) e.getEntity().getShooter()).getUniqueId().toString() + ".txt");
-			int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
+			int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
 			int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
-			int acc = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy");
-			value = value + 1; 
-			acc = (hit/value)*100;
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot", value);
+			shot++; 
+			int acc = (hit/shot)*100;
+			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot", shot);
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
 			f.save();
 		}
 		else if(e.getEntityType() == EntityType.SPLASH_POTION && e.getEntity().getShooter() instanceof Player) {
 			PluginFile f = new PluginFile(main, ((Entity) e.getEntity().getShooter()).getUniqueId().toString() + ".txt");
 			int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".potionthrown");
-			value = value + 1; 
+			value++; 
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".potionthrown", value);
 			f.save();
 		}
 	}
 	
+	@EventHandler
 	public void onArrowHit(ProjectileHitEvent e) {
-		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player) {
+		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && e.getHitEntity() != null) {
 			PluginFile f = new PluginFile(main, ((Entity) e.getEntity().getShooter()).getUniqueId().toString() + ".txt");
-			int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
+			int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
 			int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
-			int acc = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy");
-			value = value + 1; 
-			acc = (value/shot)*100;
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit", value);
+			hit++; 
+			int acc = (hit/shot)*100;
+			System.out.print(acc);
+			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit", hit);
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
 			f.save();
 		}
