@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
@@ -78,7 +79,10 @@ public class Statistics implements Listener{
 	
 	@EventHandler
 	public void onPlayerSneak(PlayerToggleSneakEvent e) {
-		
+		e.getPlayer().getStatistic(Statistic.SNEAK_TIME);
+		PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
+		f.set(e.getPlayer().getDisplayName() + ".portalcrossed", e.getPlayer().getStatistic(Statistic.SNEAK_TIME));
+		f.save();
 	}
 	
 	@EventHandler
