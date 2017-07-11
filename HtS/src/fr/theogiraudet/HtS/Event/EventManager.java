@@ -37,6 +37,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
@@ -70,7 +71,13 @@ public class EventManager implements Listener {
 	public EventManager(HtS htS) {
 		this.main = htS;
 	}
-
+	
+	@EventHandler
+	public void onEggThrow(PlayerEggThrowEvent e) {
+		Statistics stat = new Statistics(main);
+		stat.createFiles();
+	}
+	
 	@EventHandler
     public void onNetherLoad(PlayerChangedWorldEvent e) throws InterruptedException{
             if(e.getPlayer().getLocation().getWorld().getEnvironment() == Environment.NETHER){

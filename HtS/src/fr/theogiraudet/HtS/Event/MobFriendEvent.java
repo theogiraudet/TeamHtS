@@ -42,7 +42,7 @@ public class MobFriendEvent implements Listener{
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onMobSpawn(PlayerInteractEvent e){
-		if(e.getPlayer().getItemInHand().getType() == Material.MONSTER_EGG && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+		if(e.getPlayer().getItemInHand().getType() == Material.MONSTER_EGG && e.getItem().getItemMeta().hasDisplayName() && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			e.setCancelled(true);
 			Entity mob = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.fromName(e.getItem().getItemMeta().getDisplayName().split(": ")[1]));
 			mob.setCustomNameVisible(false);

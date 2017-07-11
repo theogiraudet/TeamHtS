@@ -20,7 +20,6 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Objects.PluginFile;
@@ -32,9 +31,10 @@ public class Statistics implements Listener{
 	public Statistics(HtS htS) {
 		this.main = htS;
 	}
-	
+
 	public void createFiles() {
-		for(UUID p : main.players.getPlayersInGame()) {
+		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
+			UUID p = player.getUniqueId();
 			PluginFile f = new PluginFile(main, p.toString() + ".txt");
 			String path = Bukkit.getPlayer(p).getDisplayName() + ".";
 			f.set(path + "logout" , 0);
@@ -43,7 +43,7 @@ public class Statistics implements Listener{
 			f.set(path + "diamond" , 0);
 			f.set(path + "gold" , 0);
 			f.set(path + "itempickedup" , 0);
-			f.set(path + "enchantments" , 0);
+			f.set(path + "enchantment" , 0);
 			f.set(path + "goldappleaten" , 0);
 			f.set(path + "potiondrunk" , 0);
 			f.set(path + "potionthrown" , 0);
@@ -56,25 +56,13 @@ public class Statistics implements Listener{
 			f.save();
 		}
 	}
-	
+
 	@EventHandler
 	public void onLogOut(PlayerQuitEvent e) {
 		PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
 		int value = (int) f.get(e.getPlayer().getDisplayName() + ".logout");
 		value = value + 1; 
 		f.set(e.getPlayer().getDisplayName() + ".logout", value);
-		f.save();
-	}
-	
-	@EventHandler
-	public void onPlayerSneak(PlayerToggleSneakEvent e) throws InterruptedException {
-		PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
-		int value = (int) f.get(e.getPlayer().getDisplayName() + ".sneaktime");
-		while(e.getPlayer().isSneaking()) {
-			value = value+1;
-			Thread.sleep(1000);
-		}
-		f.set(e.getPlayer().getDisplayName() + ".sneaktime", value);
 		f.save();
 	}
 	
