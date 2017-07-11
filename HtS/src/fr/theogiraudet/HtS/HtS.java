@@ -24,6 +24,7 @@ import fr.theogiraudet.HtS.Event.EventManager;
 import fr.theogiraudet.HtS.Event.Inventaire;
 import fr.theogiraudet.HtS.Event.MobFriendEvent;
 import fr.theogiraudet.HtS.Event.NoHeal;
+import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.PlayersInGame;
 import fr.theogiraudet.HtS.Objects.Team;
 import fr.theogiraudet.HtS.TaupeGun.TaupeGun;
@@ -73,7 +74,8 @@ public class HtS extends JavaPlugin {
 		pm.registerEvents(new SyT(this), this);
 		pm.registerEvents(new Spectator(this), this);
 		pm.registerEvents(new MobFriendEvent(this), this);
-		
+		pm.registerEvents(new Statistics(this), this);
+
 		getCommand("start").setExecutor(new Start(this));
 		getCommand("team").setExecutor(new TeamCommand(this));
 		getCommand("option").setExecutor(new Commands(this));
