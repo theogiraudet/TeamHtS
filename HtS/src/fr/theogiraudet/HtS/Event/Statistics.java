@@ -35,8 +35,7 @@ public class Statistics implements Listener{
 	}
 
 	public void createFiles() {
-		for(Player player : Bukkit.getServer().getOnlinePlayers()) {
-			UUID p = player.getUniqueId();
+		for(UUID p : main.players.getPlayersInGame()) {
 			PluginFile f = new PluginFile(main, p.toString() + ".txt");
 			String path = Bukkit.getPlayer(p).getDisplayName() + ".";
 			f.set(path + "logout" , 0);
