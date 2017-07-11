@@ -51,9 +51,9 @@ public class Statistics implements Listener{
 			f.set(path + "monsterkilled" , 0);
 			f.set(path + "damagedealt" , 0);
 			f.set(path + "damagereceived" , 0);
-			f.set(path + "arrow.shot" , 0);
-			f.set(path + "arrow.hit" , 0);
-			f.set(path + "arrow.accuracy" , 0);
+			f.set(path + "arrow.shot" , 0.0);
+			f.set(path + "arrow.hit" , 0.0);
+			f.set(path + "arrow.accuracy" , 0.0);
 			f.save();
 		}
 	}
@@ -174,10 +174,10 @@ public class Statistics implements Listener{
 	public void onProjectileShot(ProjectileLaunchEvent e) {
 		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player) {
 			PluginFile f = new PluginFile(main, ((Entity) e.getEntity().getShooter()).getUniqueId().toString() + ".txt");
-			int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
-			int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
+			double shot = (double) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
+			double hit = (double) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
 			shot++; 
-			int acc = (hit/shot)*100;
+			double acc = (hit/shot)*100;
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot", shot);
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
 			f.save();
@@ -195,10 +195,10 @@ public class Statistics implements Listener{
 	public void onArrowHit(ProjectileHitEvent e) {
 		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && e.getHitEntity() != null) {
 			PluginFile f = new PluginFile(main, ((Entity) e.getEntity().getShooter()).getUniqueId().toString() + ".txt");
-			int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
-			int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
+			double hit = (double) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
+			double shot = (double) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
 			hit++; 
-			int acc = (hit/shot)*100;
+			double acc = (hit/shot)*100;
 			System.out.print(acc);
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit", hit);
 			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
