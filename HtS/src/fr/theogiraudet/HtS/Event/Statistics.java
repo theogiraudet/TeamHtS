@@ -36,6 +36,7 @@ public class Statistics implements Listener{
 
 	public void createFiles() {
 		for(UUID p : main.players.getPlayersInGame()) {
+			
 			PluginFile f = new PluginFile(main, p.toString() + ".txt");
 			String path = Bukkit.getPlayer(p).getDisplayName() + ".";
 			f.set(path + "logout" , 0);
@@ -78,10 +79,12 @@ public class Statistics implements Listener{
 	
 	@EventHandler
 	public void onPlayerSneak(PlayerToggleSneakEvent e) {
-		e.getPlayer().getStatistic(Statistic.SNEAK_TIME);
-		PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
-		f.set(e.getPlayer().getDisplayName() + ".portalcrossed", e.getPlayer().getStatistic(Statistic.SNEAK_TIME));
-		f.save();
+		if(!e.getPlayer().isSneaking()) {
+			e.getPlayer().getStatistic(Statistic.SNEAK_TIME);
+			PluginFile f = new PluginFile(main, e.getPlayer().getUniqueId().toString() + ".txt");
+			f.set(e.getPlayer().getDisplayName() + ".portalcrossed", e.getPlayer().getStatistic(Statistic.SNEAK_TIME));
+			f.save();
+		}
 	}
 	
 	@EventHandler

@@ -30,6 +30,7 @@ import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Timer;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
+import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.Team;
 
@@ -92,8 +93,11 @@ public class Start implements CommandExecutor {
 			}
 			
 			if(main.teams.isEmpty()) {
+				Statistics s = new Statistics(main);
+				s.createFiles();
 				for(UUID uuid : main.players.getPlayersInGame()) {
 					Player p = Bukkit.getServer().getPlayer(uuid);
+					p.setStatistic(Statistic.SNEAK_TIME, 0);
 					p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
 					p.setHealth(20);
 					p.setFoodLevel(20);
