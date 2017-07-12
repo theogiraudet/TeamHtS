@@ -23,6 +23,7 @@ import fr.theogiraudet.HtS.Event.DisableCraft;
 import fr.theogiraudet.HtS.Event.EventManager;
 import fr.theogiraudet.HtS.Event.Inventaire;
 import fr.theogiraudet.HtS.Event.MobFriendEvent;
+import fr.theogiraudet.HtS.Event.NetherEvent;
 import fr.theogiraudet.HtS.Event.NoHeal;
 import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.PlayersInGame;
@@ -75,7 +76,8 @@ public class HtS extends JavaPlugin {
 		pm.registerEvents(new Spectator(this), this);
 		pm.registerEvents(new MobFriendEvent(this), this);
 		pm.registerEvents(new Statistics(this), this);
-
+		pm.registerEvents(new NetherEvent(this), this);
+		
 		getCommand("start").setExecutor(new Start(this));
 		getCommand("team").setExecutor(new TeamCommand(this));
 		getCommand("option").setExecutor(new Commands(this));

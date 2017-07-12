@@ -1,6 +1,5 @@
 package fr.theogiraudet.HtS.Event;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -16,10 +15,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.WorldBorder;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Skeleton;
@@ -33,20 +30,16 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.theogiraudet.HtS.BiomeMutator;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Commands.Start;
@@ -74,37 +67,10 @@ public class EventManager implements Listener {
 	
 	@EventHandler
 	public void onEggThrow(PlayerEggThrowEvent e) {
-		Statistics stat = new Statistics(main);
-		stat.createFiles();
+		e.getPlayer().setStatistic(Statistic.SNEAK_TIME, 0);
+		Statistics s = new Statistics(main);
+		s.createFiles();
 	}
-	
-	@EventHandler
-    public void onNetherLoad(PlayerChangedWorldEvent e) throws InterruptedException{
-            if(e.getPlayer().getLocation().getWorld().getEnvironment() == Environment.NETHER){
-                Thread.sleep(5000);
-                @SuppressWarnings("unused")
-                BiomeMutator BiomeMutator = new BiomeMutator(e.getPlayer());
-            }
-        }
-	
-	@EventHandler
-    public void onShulkerDeathInNether(EntityDeathEvent e){
-        if(e.getEntityType() == EntityType.SHULKER){
-        	ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
-            e.getDrops().clear();
-            if(Randomizer.RandRate(15)){
-                ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
-                EnchantmentStorageMeta esm = (EnchantmentStorageMeta) book.getItemMeta();
-                esm.addStoredEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
-                book.setItemMeta(esm);
-                drops.add(book);
-            }
-            if(Randomizer.RandRate(25)) {
-            	drops.add(new ItemStackManager(Material.SHULKER_SHELL, (short) 0, 1, "§rShulker Shell", "A un pourcentage de chance de bloquer un coup. 3 utilisations.").getItemStack());
-            }
-            e.getDrops().addAll(drops);
-        }
-    }
 	
 	@EventHandler
 	public void onDamage(EntityDamageByEntityEvent e) {
@@ -129,15 +95,7 @@ public class EventManager implements Listener {
 			}
 		}
 	}
-	
-	@EventHandler
-    public void onNetherProjectileShot(ProjectileLaunchEvent e){
-        if(e.getEntity().getLocation().getWorld().getEnvironment() == Environment.NETHER){
-            e.getEntity().setVelocity(e.getEntity().getVelocity().multiply(2.06));
-        }
-    }
-	
-	
+		
 	@EventHandler
 	public void onHealLevelChange(EntityDamageEvent e) {
 		if(main.isState(HtSState.WAIT) && e.getEntity() instanceof Player) {
