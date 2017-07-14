@@ -54,13 +54,11 @@ public class MobFriendEvent implements Listener{
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onMobDeath(EntityDeathEvent e){
-		if(e.getEntity().getCustomName() == null && (e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME)){
+		if(e.getEntity().getCustomName() == null && (e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME) && e.getEntity().getKiller() instanceof Player && main.players.isPlayerInGame(e.getEntity().getKiller().getUniqueId())){
 			if(Randomizer.RandRate(10)){
-				if(e.getEntity().getKiller() instanceof Player){
 					ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 					drops.add(new ItemStackManager(Material.MONSTER_EGG, e.getEntityType().getTypeId(), 1, ChatColor.GREEN + main.getTeam(e.getEntity().getKiller()).getTeamName() + " a un appel à un : " + e.getEntity().getName(), "Fait apparaître un monstre qui combattra à vos côtés (il ne vous suivera pas).").getItemStack());
 					e.getDrops().addAll(drops);
-				}
 			}	
 		}
 	}

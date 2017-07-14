@@ -32,7 +32,6 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
-import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
@@ -63,13 +62,6 @@ public class EventManager implements Listener {
 
 	public EventManager(HtS htS) {
 		this.main = htS;
-	}
-	
-	@EventHandler
-	public void onEggThrow(PlayerEggThrowEvent e) {
-		e.getPlayer().setStatistic(Statistic.SNEAK_TIME, 0);
-		Statistics s = new Statistics(main);
-		s.createFiles();
 	}
 	
 	@EventHandler
