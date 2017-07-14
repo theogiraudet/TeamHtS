@@ -20,5 +20,10 @@ public class OptionsInput extends Option {
 	public String requestString() {
 		return "";
 	}
+	
+	public void setInventory(String inventory) {
+		Inventories.addItem(inventory, this);
+		this.inventory = inventory;
+	}
 
 }

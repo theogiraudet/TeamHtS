@@ -7,6 +7,10 @@ import fr.theogiraudet.HtS.Objects.ItemStackManager;
 public abstract class Option {
 	
 	protected ItemStackManager icon;
+	protected String inventory;
+	
+	protected String name = null;
+	protected String lore = null;
 	
 	
 	public Option(ItemStackManager item) {
@@ -40,11 +44,6 @@ public abstract class Option {
 
 	public void setName(String name) {
 		icon.setName(name);
-	}
-	
-	
-	public void setInventory() {
-		
 	}
 
 }
