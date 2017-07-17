@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Ghast;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -67,4 +69,20 @@ public class NetherEvent implements Listener{
             e.getEntity().setVelocity(e.getEntity().getVelocity().multiply(2.06));
         }
     }
+	
+	
+	
+	@EventHandler
+	public void onGhastDeath(EntityDeathEvent e) {
+		Entity en = e.getEntity();
+		if ((en instanceof Ghast)) {
+			e.getDrops().clear();
+			if (Randomizer.RandRate(51)) {
+				en.getWorld().dropItemNaturally(en.getLocation(), new ItemStack(Material.GOLD_BLOCK, 1));
+			} else {
+				en.getWorld().dropItemNaturally(en.getLocation(), new ItemStack(Material.GOLD_INGOT, 1));
+			}
+		}
+	}
+
 }

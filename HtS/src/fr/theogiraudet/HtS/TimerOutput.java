@@ -2,7 +2,8 @@ package fr.theogiraudet.HtS;
 
 import org.bukkit.Bukkit;
 
-import fr.theogiraudet.HtS.Event.EventManager;
+import fr.theogiraudet.HtS.Event.DepthBreath;
+import fr.theogiraudet.HtS.Event.MobFixe;
 
 public class TimerOutput {
 	
@@ -18,7 +19,7 @@ public class TimerOutput {
 			if(number == 0) {
 				Bukkit.broadcastMessage("§4Les mineurs ont miné beaucoup trop profondément et ont ouvert des poches de soufre. Les mines seront envahies d'ici 1 minute !");
 			} else if(number == 1) {
-				EventManager.depthBreath = true;
+				DepthBreath.depthBreath = true;
 				Bukkit.broadcastMessage("§4Le soufre a envahi les mines !");
 			}
 		
@@ -28,7 +29,7 @@ public class TimerOutput {
 			if(number == 0) {
 				Bukkit.broadcastMessage("§4Les squelettes feront des dégâts dans 1 minutes.");
 			} else if(number == 1) {
-				EventManager.skeleton = true;
+				MobFixe.skeleton = true;
 				Bukkit.broadcastMessage("§4Les squelettes sont activés.");
 			}
 		

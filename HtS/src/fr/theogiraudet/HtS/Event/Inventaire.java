@@ -112,13 +112,13 @@ public class Inventaire implements Listener {
 			} else if(e.getCurrentItem().getType() == Material.WATCH) {
 				Bukkit.getServer().getPlayer(e.getWhoClicked().getName()).closeInventory();
 				e.getWhoClicked().sendMessage("§2Veuillez entrer la valeur voulu dans le chat, nombre entier compris entre 0 et 90 minutes.");
-				EventManager.playerDepthBreath = e.getWhoClicked().getUniqueId();
+				DepthBreath.playerDepthBreath = e.getWhoClicked().getUniqueId();
 				return;
 				
 			} else if(e.getCurrentItem().getType() == Material.IRON_FENCE) {
 				Bukkit.getServer().getPlayer(e.getWhoClicked().getName()).closeInventory();
 				e.getWhoClicked().sendMessage("§2Veuillez entrer la valeur voulu dans le chat, nombre entier compris entre 250 et 2000 blocks.");
-				EventManager.playerBorder = e.getWhoClicked().getUniqueId();
+				Border.playerBorder = e.getWhoClicked().getUniqueId();
 				return;
 
 			} else if(e.getCurrentItem().getType() == Material.COMPASS) {

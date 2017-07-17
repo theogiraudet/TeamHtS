@@ -1,4 +1,4 @@
-package fr.theogiraudet.HtS;
+package fr.theogiraudet.HtS.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
 
 public class Spectator implements Listener {

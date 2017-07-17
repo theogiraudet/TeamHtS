@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -19,13 +18,7 @@ import fr.theogiraudet.HtS.Commands.Start;
 import fr.theogiraudet.HtS.Commands.TeamCommand;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
-import fr.theogiraudet.HtS.Event.DisableCraft;
 import fr.theogiraudet.HtS.Event.EventManager;
-import fr.theogiraudet.HtS.Event.Inventaire;
-import fr.theogiraudet.HtS.Event.MobFriendEvent;
-import fr.theogiraudet.HtS.Event.NetherEvent;
-import fr.theogiraudet.HtS.Event.NoHeal;
-import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.PlayersInGame;
 import fr.theogiraudet.HtS.Objects.Team;
 import fr.theogiraudet.HtS.TaupeGun.TaupeGun;
@@ -51,7 +44,7 @@ public class HtS extends JavaPlugin {
 	@Override
 	public void onEnable()  {
 		
-		PluginManager pm = getServer().getPluginManager();
+		
 		Bukkit.getWorld("world").setDifficulty(Difficulty.HARD);
 		Bukkit.getWorld("world_nether").setDifficulty(Difficulty.HARD);
 		Bukkit.getWorld("world_the_end").setDifficulty(Difficulty.HARD);
@@ -67,16 +60,7 @@ public class HtS extends JavaPlugin {
 		border.setCenter(0.0, 0.0);
 		border.setSize(1000);
 		
-		pm.registerEvents(new NoHeal(this), this);
-		pm.registerEvents(new EventManager(this), this);
-		pm.registerEvents(new TeamCommand(this), this);
-		pm.registerEvents(new Inventaire(this), this);
-		pm.registerEvents(new DisableCraft(this), this);
-		pm.registerEvents(new SyT(this), this);
-		pm.registerEvents(new Spectator(this), this);
-		pm.registerEvents(new MobFriendEvent(this), this);
-		pm.registerEvents(new Statistics(this), this);
-		pm.registerEvents(new NetherEvent(this), this);
+		EventManager.loadEvents(this);
 		
 		getCommand("start").setExecutor(new Start(this));
 		getCommand("team").setExecutor(new TeamCommand(this));
