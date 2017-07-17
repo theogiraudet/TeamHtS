@@ -1,5 +1,8 @@
 package fr.theogiraudet.HtS;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,5 +113,4 @@ public class HtS extends JavaPlugin {
 	public boolean isState(HtSState state) { return state == currentState; }
 	public boolean isSyTState(ModState state) { return state == currentSyTState; }
 	public boolean isTaupeState(ModState state) { return state == currentTaupeState; }
-
 }
