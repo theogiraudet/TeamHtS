@@ -29,6 +29,7 @@ public class FakeDeath implements Listener {
 	private DeathEntityLoot playerLoot = new DeathEntityLoot(new ItemStack(Material.GOLDEN_APPLE, 1),
 			new ItemStackManager(Material.SKULL_ITEM, (short) 3, 1, "").getItemStack());
 	private HtS main;
+	private Statistics s = new Statistics(main);
 	
 	public FakeDeath(HtS htS) { main = htS; }
 
@@ -64,9 +65,13 @@ public class FakeDeath implements Listener {
 				}
 				if(main.teams.size() == 1) {
 					Bukkit.broadcastMessage("§2L'équipe " + main.getTeams().get(0).getTeamColor() + main.getTeams().get(0).getTeamName() + "§r§2 a gagné !");
+					s.gameTime();
+					s.getStatistics();
 				}
 			} else if(main.teams.isEmpty() && main.players.getPlayersInGame().size() == 1) {
 				Bukkit.broadcastMessage("§2" + Bukkit.getPlayer(main.players.getPlayersInGame().get(0)).getName() + " a gagné !");
+				s.gameTime();
+				s.getStatistics();
 			}
 			
 			if(p.getKiller() instanceof Player) {
