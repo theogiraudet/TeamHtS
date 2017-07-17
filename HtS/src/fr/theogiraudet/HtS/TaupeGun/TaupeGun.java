@@ -1,7 +1,9 @@
 package fr.theogiraudet.HtS.TaupeGun;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -18,7 +20,7 @@ public class TaupeGun {
 	private List<UUID> taupes = new ArrayList<>();
 	private HtS main;
 	private Statistics s = new Statistics(main);
-	private Map<UUID, boolean> taupeReveal = new HashMap<>();
+	public Map<UUID, Boolean> taupeReveal = new HashMap<>();
 	
 	 public TaupeGun(HtS main) {
 		 this.main = main;
@@ -36,6 +38,7 @@ public class TaupeGun {
 			taupes.add(uuid);
 			Bukkit.getPlayer(uuid).sendMessage("§4Vous êtes une taupe infiltrée dans l'équipe où vous êtes actuellement. Votre mission est d'éliminer votre équipe et de rejoindre les autres taupes.\n Nous vous avons réservé un canal spécial afin de communiquer avec les autres taupes, accessible en mettant un '!' devant votre message.");
 			s.statTaupe(taupes);
+			taupeReveal.put(uuid, false);
 		}
 		main.setTaupeState(ModState.PRORAND);
 	 }
