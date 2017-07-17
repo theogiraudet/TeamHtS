@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Timer;
+import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.Team;
 
@@ -30,7 +31,8 @@ public class TaupeGun {
 			int i = Randomizer.RandI(0, team.getTeamPlayers().size() - 1);
 			UUID uuid = team.getTeamPlayers().get(i);
 			taupes.add(uuid);
-			Bukkit.getPlayer(uuid).sendMessage("Vous êtes une taupe. Votre");
+			Bukkit.getPlayer(uuid).sendMessage("§4Vous êtes une taupe infiltrée dans l'équipe où vous êtes actuellement. Votre mission est d'éliminer votre équipe et de rejoindre les autres taupes.\n Nous vous avons réservé un canal spécial afin de communiquer avec les autres taupes, accessible en mettant un '!' devant votre message.");
+			Statistics.statTaupe(taupes);
 		}
 	 }
 	 
