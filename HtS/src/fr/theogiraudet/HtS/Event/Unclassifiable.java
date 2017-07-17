@@ -29,7 +29,6 @@ public class Unclassifiable implements Listener {
 		}
 	}
 	
-	
 	//Algue Urticante
 	@EventHandler
 	public void onAlgaeCatch(PlayerPickupItemEvent e) {
