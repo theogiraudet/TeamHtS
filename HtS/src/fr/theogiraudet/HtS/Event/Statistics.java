@@ -1,6 +1,8 @@
 package fr.theogiraudet.HtS.Event;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,19 +20,21 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 import fr.theogiraudet.HtS.HtS;
+import fr.theogiraudet.HtS.Commands.Start;
 import fr.theogiraudet.HtS.Objects.PluginFile;
+import net.md_5.bungee.api.ChatColor;
 
 public class Statistics implements Listener{
 	
 	private HtS main;
 	private ArrayList<Integer> maximum = new ArrayList<>();
+	private ArrayList<Integer> minimum = new ArrayList<>();
 	@SuppressWarnings("serial")
 	ArrayList<String> character = new ArrayList<String>() {
 		{
@@ -59,7 +63,7 @@ public class Statistics implements Listener{
 
 	public void createFiles() {
 		PluginFile g = new PluginFile(main, "general.txt");
-		g.set("time", 0);
+		g.set("time", "hh:mm:ss");
 		g.save();
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 			PluginFile f = new PluginFile(main, p.getDisplayName() + ".txt");
@@ -71,7 +75,9 @@ public class Statistics implements Listener{
 		}
 	}
 	
-	public void getBestStatistics() {
+	public void getStatistics() {
+		PluginFile g = new PluginFile(main, "general.txt");
+		Bukkit.broadcastMessage("La partie a durée : " + g.get("time"));
 		for(int i = 0; i < character.size(); i++) {
 			ArrayList<Integer> array = new ArrayList<>();
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -79,20 +85,25 @@ public class Statistics implements Listener{
 				String path = p.getDisplayName() + character.get(i);
 				array.add((Integer) f.get(path));
 			}
-			int m = getMax(array);
-			maximum.add(m);
+			int max = getMax(array);
+			int min = getMin(array);
+			minimum.add(min);
+			maximum.add(max);
 		}
 		for(int i = 0; i < character.size(); i++) {
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 				PluginFile f = new PluginFile(main, p.getDisplayName() + ".txt");
 				String path = p.getDisplayName() + character.get(i);
 				if(maximum.get(i) == f.get(path)) {
-					System.out.println(p.getDisplayName() + character.get(i) + ": " + maximum.get(i));
+					Bukkit.broadcastMessage(ChatColor.GREEN + "MAXIMUM." + p.getDisplayName() + character.get(i) + ": " + maximum.get(i));
+				}
+				if(minimum.get(i) == f.get(path)) {
+					Bukkit.broadcastMessage(ChatColor.RED + "minimum." + p.getDisplayName() + character.get(i) + ": " + minimum.get(i));
 				}
 			}
 		}
 	}
-	
+
 	private int getMax(ArrayList<Integer> array) {
 		int max = 0;
 		for(int i = 0; i < array.size(); i++) {
@@ -103,17 +114,41 @@ public class Statistics implements Listener{
 		return max;	
 	}
 	
-	@EventHandler
-	public void onEggThrow(PlayerEggThrowEvent e) {
-		getBestStatistics();
+	private int getMin(ArrayList<Integer> array) {
+		int min = array.get(0);
+		for(int i = 0; i < array.size(); i++) {
+			if(array.get(i) < min) {
+				min = array.get(i);
+			}
+		}
+		return min;	
+	}
+
+	//General Statistics
+	
+	public void gameTime() {
+		PluginFile f = new PluginFile(main, "general.txt");
+		f.set("time", Start.timerGame);
+		f.save();
 	}
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		PluginFile f = new PluginFile(main, "general.txt");
-		f.set("death." + e.getEntity().getDisplayName(), 0);
+		f.set("death." + e.getEntity().getDisplayName(), Start.timerGame);
 		f.save();
 	}
+	
+	public void statTaupe(List<UUID> taupes) {
+		PluginFile f = new PluginFile(main, "general.txt");
+		for(UUID t : taupes) {
+			Player p = Bukkit.getPlayer(t);
+			f.set("taupe.", p.getDisplayName());
+		}
+		f.save();
+	}
+	
+	//Individual Player Statistics
 	
 	@EventHandler
 	public void onLogOut(PlayerQuitEvent e) {

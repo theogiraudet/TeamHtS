@@ -26,6 +26,7 @@ import fr.theogiraudet.HtS.Objects.Randomizer;
 public class NetherEvent implements Listener{
 
 	public HtS main;
+	private boolean marsgravity = false;
 
 	public NetherEvent(HtS htS) {
 		this.main = htS;
@@ -34,13 +35,13 @@ public class NetherEvent implements Listener{
 	@EventHandler
     public void onNetherLoad(PlayerChangedWorldEvent e) throws InterruptedException{
             if(e.getPlayer().getLocation().getWorld().getEnvironment() == Environment.NETHER){
-				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000 * 20, 1, false, false));
+            	if(marsgravity) {e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000 * 20, 1, false, false));} //Mars Pseudo-Gravity Simulation
             	Thread.sleep(5000);
                 @SuppressWarnings("unused")
                 BiomeMutator BiomeMutator = new BiomeMutator(e.getPlayer());
             }
-            else {
-				e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
+            else if(marsgravity) {
+				e.getPlayer().removePotionEffect(PotionEffectType.JUMP); //Mars Pseudo-Gravity Simulation
             }
         }
 	
@@ -64,15 +65,6 @@ public class NetherEvent implements Listener{
     }
 	
 	@EventHandler
-    public void onNetherProjectileShot(ProjectileLaunchEvent e){
-        if(e.getEntity().getLocation().getWorld().getEnvironment() == Environment.NETHER){
-            e.getEntity().setVelocity(e.getEntity().getVelocity().multiply(2.06));
-        }
-    }
-	
-	
-	
-	@EventHandler
 	public void onGhastDeath(EntityDeathEvent e) {
 		Entity en = e.getEntity();
 		if ((en instanceof Ghast)) {
@@ -85,4 +77,13 @@ public class NetherEvent implements Listener{
 		}
 	}
 
+	//Mars Pseudo-Gravity Simulation
+	@EventHandler
+    public void onNetherProjectileShot(ProjectileLaunchEvent e){
+       if(marsgravity) {
+    	   if(e.getEntity().getLocation().getWorld().getEnvironment() == Environment.NETHER){
+            e.getEntity().setVelocity(e.getEntity().getVelocity().multiply(2.06));
+    	   }   
+       }
+    }
 }
