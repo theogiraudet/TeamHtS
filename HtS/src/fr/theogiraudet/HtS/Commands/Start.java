@@ -41,6 +41,7 @@ public class Start implements CommandExecutor {
 	public static int depthBreathT = 70;
 	public static boolean depthBreathA = true;
 	public int timer = 0;
+	public static String timerGame;
 	
 	public Start(HtS htS) { main = htS;}
 	
@@ -137,6 +138,7 @@ public class Start implements CommandExecutor {
 				for(Entry<Player, ScoreboardSign> sign : main.board.entrySet()) {
 					sign.getValue().setLine(12, "§o" + dateformat.format(timer));
 				}
+				timerGame = dateformat.format(timer);
 				
 				
 				}
