@@ -18,6 +18,7 @@ public class TaupeGun {
 	private List<UUID> taupes = new ArrayList<>();
 	private HtS main;
 	private Statistics s = new Statistics(main);
+	private Map<UUID, boolean> taupeReveal = new HashMap<>();
 	
 	 public TaupeGun(HtS main) {
 		 this.main = main;

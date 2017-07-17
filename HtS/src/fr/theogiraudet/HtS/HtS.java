@@ -13,9 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import fr.theogiraudet.HtS.Commands.Commands;
-import fr.theogiraudet.HtS.Commands.Start;
-import fr.theogiraudet.HtS.Commands.TeamCommand;
+import fr.theogiraudet.HtS.Commands.CommandManager;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.EventManager;
@@ -61,21 +59,7 @@ public class HtS extends JavaPlugin {
 		border.setSize(1000);
 		
 		EventManager.loadEvents(this);
-		
-		getCommand("start").setExecutor(new Start(this));
-		getCommand("team").setExecutor(new TeamCommand(this));
-		getCommand("option").setExecutor(new Commands(this));
-		getCommand("res").setExecutor(new Commands(this));
-		getCommand("remove").setExecutor(new Commands(this));
-		getCommand("spectate").setExecutor(new Commands(this));
-		getCommand("radar").setExecutor(new SyT(this));
-		getCommand("huntlist").setExecutor(new SyT(this));
-		getCommand("cible").setExecutor(new SyT(this));
-		getCommand("heal").setExecutor(new Commands(this));
-		getCommand("feed").setExecutor(new Commands(this));
-		getCommand("broadcast").setExecutor(new Commands(this));
-		getCommand("players").setExecutor(new Commands(this));
-		getCommand("random").setExecutor(new Commands(this));
+		CommandManager.loadCommands(this);
 
 		
 }
