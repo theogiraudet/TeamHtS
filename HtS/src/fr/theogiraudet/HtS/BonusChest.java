@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.bukkit.block.Block;
 
 import fr.theogiraudet.HtS.Objects.Randomizer;
 
@@ -42,6 +43,7 @@ public class BonusChest {
 				if(place) {
 					Location l = new Location(w, coords[0], coords[1], coords[2]);
 					l.getBlock().setType(Material.CHEST);
+					Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "blockdata " + l.getBlockX() + " " + l.getBlockY() + " " + l.getBlockZ() + " {LootTable:\"coffre\"}");
 					Bukkit.broadcastMessage("§4[§6HtS§4]§r Bonus Chest: " + coords[0] + " " + coords[2] + " !");
 					place = false;
 				}
