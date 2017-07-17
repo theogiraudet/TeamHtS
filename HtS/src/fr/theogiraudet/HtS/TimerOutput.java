@@ -42,7 +42,7 @@ public class TimerOutput {
 			this.main.stressYourTarget.radar();
 			
 		} else if(output == "Taupe") {
-			
+			this.main.taupeGun.SelectTaupe();
 		}
 	}
 	
