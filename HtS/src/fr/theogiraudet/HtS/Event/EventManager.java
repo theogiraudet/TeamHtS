@@ -4,6 +4,7 @@ import org.bukkit.plugin.PluginManager;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Commands.TeamCommand;
+import fr.theogiraudet.HtS.TaupeGun.TaupeChannel;
 import fr.theogiraudet.SyT.SyT;
 
 public class EventManager {
@@ -31,6 +32,7 @@ public class EventManager {
 		pm.registerEvents(new Border(htS), htS);
 		pm.registerEvents(new JoinEvent(htS), htS);
 		pm.registerEvents(new Unclassifiable(htS), htS);
+		pm.registerEvents(new TaupeChannel(htS), htS);
 	}
 	
 }
