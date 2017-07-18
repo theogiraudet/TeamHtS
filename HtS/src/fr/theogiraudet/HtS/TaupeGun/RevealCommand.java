@@ -15,7 +15,7 @@ public class RevealCommand implements CommandExecutor {
 
 	private HtS main;
 
-	RevealCommand(HtS htS) {
+	public RevealCommand(HtS htS) {
 		main = htS;
 	}
 
