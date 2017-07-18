@@ -50,6 +50,8 @@ public class HtS extends JavaPlugin {
 		Bukkit.getWorld("world").setSpawnLocation(0, 205, 0);
 		Bukkit.setSpawnRadius(0);
 		this.setState(HtSState.WAIT);
+		this.setSyTState(ModState.OFF);
+		this.setTaupeState(ModState.OFF);
 		recap.put("§6Type d'HtS : ", "§rClassique");
 		recap.put("§6Équipe : ", "§rNon");
 		recap.put("§6Bordure : ", "§r1000 * 1000");
