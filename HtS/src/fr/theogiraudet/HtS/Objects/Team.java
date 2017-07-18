@@ -21,7 +21,7 @@ public class Team{
     private Byte teamWool;
 
     private Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-    private org.bukkit.scoreboard.Team team;    
+    private org.bukkit.scoreboard.Team team = board.registerNewTeam("unknown");    
         
     public Team(String name, String color, Byte wooldata){
         teamName = name;
