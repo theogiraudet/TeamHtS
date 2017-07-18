@@ -12,7 +12,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class Team{
+public class Team {
     
     private String teamName;
     private String teamColor;

@@ -22,7 +22,6 @@ public class TaupeGun {
 	private HtS main;
 	private Statistics s = new Statistics(main);
 	public Map<UUID, Boolean> taupeReveal = new HashMap<>();
-	private TaupeTeam taupeteam = new TaupeTeam();
 	
 	 public TaupeGun(HtS main) {
 		 this.main = main;
@@ -34,7 +33,8 @@ public class TaupeGun {
 		 }
 	 
 	 public void SelectTaupe() {
-		for(Team team : main.getTeams()) {
+		 TaupeTeam taupeteam = new TaupeTeam();
+		 for(Team team : main.getTeams()) {
 			int i = Randomizer.RandI(0, team.getTeamPlayers().size() - 1);
 			UUID uuid = team.getTeamPlayers().get(i);
 			taupes.add(uuid);
