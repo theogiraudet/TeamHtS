@@ -1,6 +1,7 @@
 package fr.theogiraudet.HtS.Commands;
 
 import fr.theogiraudet.HtS.HtS;
+import fr.theogiraudet.HtS.TaupeGun.RevealCommand;
 import fr.theogiraudet.SyT.SyT;
 
 public class CommandManager {
@@ -20,7 +21,7 @@ public class CommandManager {
 		htS.getCommand("broadcast").setExecutor(new Commands(htS));
 		htS.getCommand("players").setExecutor(new Commands(htS));
 		htS.getCommand("random").setExecutor(new Commands(htS));
-		htS.getCommand("reveal").setExecutor(new Commands(htS));
+		htS.getCommand("reveal").setExecutor(new RevealCommand(htS));
 	}
 	
 }
