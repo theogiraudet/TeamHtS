@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBucketFillEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import fr.theogiraudet.HtS.HtS;
@@ -25,6 +26,15 @@ public class Unclassifiable implements Listener {
 			} else if (Randomizer.RandRate(3)) {
 				p.getInventory().addItem(new ItemStack(Material.IRON_NUGGET, 1));
 			}
+		}
+	}
+	
+	//Algue Urticante
+	@EventHandler
+	public void onAlgaeCatch(PlayerPickupItemEvent e) {
+		if(e.getItem().getCustomName().equals("Algue Urticante") && e.getItem().getItemStack().getType() == Material.DOUBLE_PLANT) {
+			e.getPlayer().getInventory().remove(Material.DOUBLE_PLANT);
+			e.getPlayer().damage(0.5);
 		}
 	}
 
