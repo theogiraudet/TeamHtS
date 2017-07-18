@@ -32,7 +32,7 @@ public class Unclassifiable implements Listener {
 	//Algue Urticante
 	@EventHandler
 	public void onAlgaeCatch(PlayerPickupItemEvent e) {
-		if(e.getItem().getCustomName().equals("Algue Urticante") && e.getItem().getItemStack().getType() == Material.DOUBLE_PLANT) {
+		if(e.getItem().getCustomName() == "Algue Urticante" && e.getItem().getItemStack().getType() == Material.DOUBLE_PLANT) {
 			e.getPlayer().getInventory().remove(Material.DOUBLE_PLANT);
 			e.getPlayer().damage(0.5);
 		}

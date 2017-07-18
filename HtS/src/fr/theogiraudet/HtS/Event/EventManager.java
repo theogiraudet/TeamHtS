@@ -33,6 +33,7 @@ public class EventManager {
 		pm.registerEvents(new JoinEvent(htS), htS);
 		pm.registerEvents(new Unclassifiable(htS), htS);
 		pm.registerEvents(new TaupeChannel(htS), htS);
+		pm.registerEvents(new HeadShot(htS), htS);
 	}
 	
 }
