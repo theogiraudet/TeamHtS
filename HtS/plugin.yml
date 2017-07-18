@@ -45,3 +45,4 @@ commands:
  random:
   description: Donne un x et un y random de la map.
   usage: Erreur syntaxe ! Faites /random
+ reveal: 
