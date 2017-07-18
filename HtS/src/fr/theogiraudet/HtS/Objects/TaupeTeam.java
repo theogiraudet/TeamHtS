@@ -9,7 +9,7 @@ import fr.theogiraudet.HtS.HtS;
 public class TaupeTeam {    
 	
 	private Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-	private org.bukkit.scoreboard.Team taupe;
+	private org.bukkit.scoreboard.Team taupe = board.registerNewTeam("taupeteam");
 	private HtS main;    
 	
 	public TaupeTeam(HtS htS) {
