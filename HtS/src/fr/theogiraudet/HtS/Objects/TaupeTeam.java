@@ -4,27 +4,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 
-import fr.theogiraudet.HtS.HtS;
-
-public class TaupeTeam {    
-	
-	private Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-	private org.bukkit.scoreboard.Team taupe = board.registerNewTeam("taupeteam");
-	private HtS main;    
-	
-	public TaupeTeam(HtS htS) {
-		this.main = htS;
-	}
-	
-	public TaupeTeam() {
-    	taupe = board.registerNewTeam("taupeteam");
+public class TaupeTeam {
+    
+    private Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+    private org.bukkit.scoreboard.Team team = board.registerNewTeam("unknown");    
+        
+    public TaupeTeam(){
+        team = board.registerNewTeam("taupeteam");
     }
     
-    public void addTaupe(Player p) {
-    	taupe.addEntry(p + ".taupe");
-    }
-    
-    public void removeTaupe(Player p) {
-    	main.getTeam(p).removePlayer(p.getName());
+    public void addTaupe(Player player){
+        team.addEntry(player.getDisplayName() + ".taupe");
     }
 }
