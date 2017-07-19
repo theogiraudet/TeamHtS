@@ -42,7 +42,7 @@ public class BonusChest {
 				if(place) {
 					Location l = new Location(w, coords[0], coords[1], coords[2]);
 					l.getBlock().setType(Material.CHEST);
-					Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "blockdata " + l.getBlockX() + " " + l.getBlockY() + " " + l.getBlockZ() + " {LootTable:\"coffre\"}");
+					Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "blockdata " + l.getBlockX() + " " + l.getBlockY() + " " + l.getBlockZ() + " {LootTable:\"customs:coffre\"}");
 					Bukkit.broadcastMessage("§4[§6HtS§4]§r Bonus Chest: " + coords[0] + " " + coords[2] + " !");
 					place = false;
 				}

@@ -168,7 +168,7 @@ public class Start implements CommandExecutor {
 			}
 		
 		
-		Timer chest = new Timer(main, "Chest",1, 2, 3, 120, 150, 180);
+		Timer chest = new Timer(main, "Chest", 180, 1, 2, 3, 150, 180);
 		chest.runTaskTimer(main, 20, 20);
 		
 		return true;	
