@@ -21,9 +21,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.ScoreboardSign;
@@ -48,7 +45,7 @@ public class Start implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 		if(sender instanceof Player && cmd.getName().equalsIgnoreCase("start") && sender.hasPermission("start.use") && main.isState(HtSState.WAIT)) {
-			Scoreboard sb = Bukkit.getScoreboardManager().getNewScoreboard();
+
 			
 			HashMap<String, String> recap2 = new HashMap<>();
 			recap2 = main.recap;
@@ -63,10 +60,9 @@ public class Start implements CommandExecutor {
 			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule sendCommandFeedback false");
 			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives add §4\u2764 health");
 			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives setdisplay belowName §4\u2764");
-			Objective objective = sb.registerNewObjective("health", "health");
-			objective.setDisplayName("§4\u2764");
-			objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-			objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives add keurkeur health");
+			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives setdisplay list keurkeur");
+
 			
 			if(main.isSyTState(ModState.OFF)) {
 				Bukkit.getWorld("world").setPVP(true);
