@@ -65,6 +65,7 @@ public class Team {
     
     public void removePlayer(String player){
         team.removeEntry(player);
+        teamPlayers.remove(player);
     }
     
     public void clearTeam(){
