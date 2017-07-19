@@ -33,7 +33,7 @@ public class Unclassifiable implements Listener {
 	@EventHandler
 	public void onAlgaeCatch(PlayerPickupItemEvent e) {
 		if(e.getItem().getItemStack().getType() == Material.DOUBLE_PLANT) {
-			e.getPlayer().getInventory().remove(Material.DOUBLE_PLANT);
+			e.getPlayer().getInventory().removeItem(new ItemStack(Material.DOUBLE_PLANT, 1));
 			e.getPlayer().damage(0.5);
 		}
 	}
