@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import fr.theogiraudet.HtS.HtS;
 
@@ -20,7 +22,7 @@ public class HeadShot implements Listener {
 		
 	@EventHandler
 	public void onDamage(EntityDamageByEntityEvent e) {
-		if(e.getCause() == DamageCause.PROJECTILE) {
+		if(e.getCause() == DamageCause.PROJECTILE && e.getEntity() instanceof Player) {
 			Projectile proj = (Projectile) e.getDamager();
 			if(proj.getShooter() instanceof Player) {
 				Entity shot = e.getEntity();
@@ -30,7 +32,9 @@ public class HeadShot implements Listener {
 				boolean headshot = Y - shotY > 1.35d;
 				
 				if(headshot) {
-					e.setDamage(e.getDamage()*100);
+					Player p = (Player) e.getEntity();
+					p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1*20, 255));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2*20, 255));
 				}
 			}
 		}
