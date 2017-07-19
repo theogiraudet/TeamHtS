@@ -29,7 +29,6 @@ public class FakeDeath implements Listener {
 	private DeathEntityLoot playerLoot = new DeathEntityLoot(new ItemStack(Material.GOLDEN_APPLE, 1),
 			new ItemStackManager(Material.SKULL_ITEM, (short) 3, 1, "").getItemStack());
 	private HtS main;
-	private Statistics s = new Statistics(main);
 	
 	public FakeDeath(HtS htS) { main = htS; }
 
@@ -38,6 +37,7 @@ public class FakeDeath implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
+		Statistics s = new Statistics(main);
 		Player p = e.getEntity();
 		if (!(p.getKiller() instanceof Creeper)) {
 			p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
