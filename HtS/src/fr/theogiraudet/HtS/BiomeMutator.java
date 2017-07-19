@@ -13,16 +13,16 @@ import fr.theogiraudet.HtS.Objects.Randomizer;
 
 public class BiomeMutator{
 	
-	private boolean wart = false, netherwart = false, shulker = false;	
-	private Player p;
-	private int cx, cz, x, y, z, ybc, ytc, xlc, xrc, zlc, zrc;
+	private static boolean wart = false, netherwart = false, shulker = false;	
+	private static Player p;
+	private static int cx, cz, x, y, z, ybc, ytc, xlc, xrc, zlc, zrc;
 	
 	@SuppressWarnings("deprecation")
-	public BiomeMutator(Player player){	
+	public static void NetherGenerator(Player player){	
 		p = player;
 		World w = p.getLocation().getWorld();		
 		for(Chunk c : w.getLoadedChunks()){
-			if(Randomizer.RandRate(5)){
+			if(Randomizer.RandRate(3)){
 				cx = c.getX() << 4;
 				cz = c.getZ() << 4;	
 				for(x = cx; x < cx + 16; x++) {
@@ -90,5 +90,5 @@ public class BiomeMutator{
 				}	
 			}
 		}	
-	}	
+	}
 }

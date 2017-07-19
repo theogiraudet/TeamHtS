@@ -37,8 +37,8 @@ public class NetherEvent implements Listener{
             if(e.getPlayer().getLocation().getWorld().getEnvironment() == Environment.NETHER){
             	if(marsgravity) {e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 10000 * 20, 1, false, false));} //Mars Pseudo-Gravity Simulation
             	Thread.sleep(5000);
-                @SuppressWarnings("unused")
-                BiomeMutator BiomeMutator = new BiomeMutator(e.getPlayer());
+                BiomeMutator.NetherGenerator(e.getPlayer());
+                
             }
             else if(marsgravity) {
 				e.getPlayer().removePotionEffect(PotionEffectType.JUMP); //Mars Pseudo-Gravity Simulation
