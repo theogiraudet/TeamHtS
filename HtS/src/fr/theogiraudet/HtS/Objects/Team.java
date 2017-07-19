@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Scoreboard;
 
+import fr.theogiraudet.HtS.HtS;
 import net.md_5.bungee.api.ChatColor;
 
 public class Team {
@@ -19,12 +20,13 @@ public class Team {
     private List<String> teamPlayers = new ArrayList<>();
     private int teamSize;
     private Byte teamWool;
-
-    private Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-    private org.bukkit.scoreboard.Team team = board.registerNewTeam("unknown");    
-        
-    public Team(String name, String color, Byte wooldata){
-        teamName = name;
+    
+    private Scoreboard board;
+    private org.bukkit.scoreboard.Team team = board.registerNewTeam("unknown");
+    
+    public Team(String name, String color, Byte wooldata, HtS main){
+        board = main.b;
+    	teamName = name;
         teamColor = color.toUpperCase();
         teamWool = wooldata;
         

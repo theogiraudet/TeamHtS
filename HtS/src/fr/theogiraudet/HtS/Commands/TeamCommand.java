@@ -67,7 +67,7 @@ public class TeamCommand implements CommandExecutor, Listener {
 						}
 					}
 					System.out.println(args[1] + " " + args[2] + " " + args[3]);
-					main.teams.add(new Team(args[1], args[2].replace("&", "§"), Byte.parseByte(args[3])));
+					main.teams.add(new Team(args[1], args[2].replace("&", "§"), Byte.parseByte(args[3]), main));
 					sender.sendMessage("§2Team ajoutée !");
 					main.recap.replace("§6Équipe : ", "§rOui");
 					return true;
