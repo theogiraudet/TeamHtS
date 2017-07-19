@@ -54,6 +54,7 @@ public class Statistics implements Listener{
 			add(".arrow.shot");
 			add(".arrow.hit");
 			add(".arrow.accuracy");
+			add(".arrow.longshot");
 		}
 	};
 	@SuppressWarnings("serial")
@@ -75,6 +76,7 @@ public class Statistics implements Listener{
 			add("Fléche Tirée:");
 			add("Flèche Touchée:");
 			add("Précision:");
+			add("Tir >50m:");
 		}
 	};
 	
@@ -174,153 +176,202 @@ public class Statistics implements Listener{
 	
 	@EventHandler
 	public void onLogOut(PlayerQuitEvent e) {
-		PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-		int value = (int) f.get(e.getPlayer().getDisplayName() + ".logout");
-		value = value + 1; 
-		f.set(e.getPlayer().getDisplayName() + ".logout", value);
-		f.save();
+		try {
+			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+			int value = (int) f.get(e.getPlayer().getDisplayName() + ".logout");
+			value = value + 1;
+			f.set(e.getPlayer().getDisplayName() + ".logout", value);
+			f.save();
+		} catch (Exception r) {}
 	}
 	
 	@EventHandler
 	public void onPlayerSneak(PlayerToggleSneakEvent e) {
-		if(!e.getPlayer().isSneaking()) {
-			e.getPlayer().getStatistic(Statistic.SNEAK_TIME);
-			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-			f.set(e.getPlayer().getDisplayName() + ".sneaktime", e.getPlayer().getStatistic(Statistic.SNEAK_TIME)/20);
-			f.save();
+		try {
+			if (!e.getPlayer().isSneaking()) {
+				e.getPlayer().getStatistic(Statistic.SNEAK_TIME);
+				PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+				f.set(e.getPlayer().getDisplayName() + ".sneaktime",e.getPlayer().getStatistic(Statistic.SNEAK_TIME) / 20);
+				f.save();
+			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onPlayerPortalCross(PlayerChangedWorldEvent e) {
-		PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName()+ ".txt");
-		int value = (int) f.get(e.getPlayer().getDisplayName() + ".portalcrossed");
-		value++; 
-		f.set(e.getPlayer().getDisplayName() + ".portalcrossed", value);
-		f.save();
+		try {
+			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+			int value = (int) f.get(e.getPlayer().getDisplayName() + ".portalcrossed");
+			value++;
+			f.set(e.getPlayer().getDisplayName() + ".portalcrossed", value);
+			f.save();
+		} catch (Exception r) {
+		}
 	}
 	
 	@EventHandler
 	public void onOreMined(BlockBreakEvent e) {
-		if(e.getPlayer() != null) {
-			if(e.getBlock().getType() == Material.DIAMOND_ORE) {
-				PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-				int value = (int) f.get(e.getPlayer().getDisplayName() + ".diamond");
-				value++; 
-				f.set(e.getPlayer().getDisplayName() + ".diamond", value);
-				f.save();
+		try {
+			if (e.getPlayer() != null) {
+				if (e.getBlock().getType() == Material.DIAMOND_ORE) {
+					PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+					int value = (int) f.get(e.getPlayer().getDisplayName() + ".diamond");
+					value++;
+					f.set(e.getPlayer().getDisplayName() + ".diamond", value);
+					f.save();
+				} else if (e.getBlock().getType() == Material.GOLD_ORE) {
+					PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+					int value = (int) f.get(e.getPlayer().getDisplayName() + ".gold");
+					value = value + 1;
+					f.set(e.getPlayer().getDisplayName() + ".gold", value);
+					f.save();
+				}
 			}
-			else if(e.getBlock().getType() == Material.GOLD_ORE) {
-				PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-				int value = (int) f.get(e.getPlayer().getDisplayName() + ".gold");
-				value = value + 1; 
-				f.set(e.getPlayer().getDisplayName() + ".gold", value);
-				f.save();
-			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onItemPickup(PlayerPickupItemEvent e) {
-		PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-		int value = (int) f.get(e.getPlayer().getDisplayName() + ".itempickedup");
-		value++; 
-		f.set(e.getPlayer().getDisplayName() + ".itempickedup", value);
-		f.save();
+		try {
+			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+			int value = (int) f.get(e.getPlayer().getDisplayName() + ".itempickedup");
+			value++;
+			f.set(e.getPlayer().getDisplayName() + ".itempickedup", value);
+			f.save();
+		} catch (Exception r) {
+		}
 	}
 	
 	@EventHandler
 	public void onEnchantment(EnchantItemEvent e) {
-		PluginFile f = new PluginFile(main, e.getEnchanter().getDisplayName() + ".txt");
-		int value = (int) f.get(e.getEnchanter().getDisplayName() + ".enchantment");
-		value++; 
-		f.set(e.getEnchanter().getDisplayName() + ".enchantment", value);
-		f.save();
+		try {
+			PluginFile f = new PluginFile(main, e.getEnchanter().getDisplayName() + ".txt");
+			int value = (int) f.get(e.getEnchanter().getDisplayName() + ".enchantment");
+			value++;
+			f.set(e.getEnchanter().getDisplayName() + ".enchantment", value);
+			f.save();
+		} catch (Exception r) {
+		}
 	}
 	
 	@EventHandler
 	public void onItemConsumed(PlayerItemConsumeEvent e) {
-		if(e.getItem().getType() == Material.GOLDEN_APPLE) {
-			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-			int value = (int) f.get(e.getPlayer().getDisplayName() + ".goldappleaten");
-			value++; 
-			f.set(e.getPlayer().getDisplayName() + ".goldappleaten", value);
-			f.save();
-		}
-		else if(e.getItem().getType() == Material.POTION) {
-			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
-			int value = (int) f.get(e.getPlayer().getDisplayName() + ".potiondrunk");
-			value++; 
-			f.set(e.getPlayer().getDisplayName() + ".potiondrunk", value);
-			f.save();
+		try {
+			if (e.getItem().getType() == Material.GOLDEN_APPLE) {
+				PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+				int value = (int) f.get(e.getPlayer().getDisplayName() + ".goldappleaten");
+				value++;
+				f.set(e.getPlayer().getDisplayName() + ".goldappleaten", value);
+				f.save();
+			} else if (e.getItem().getType() == Material.POTION) {
+				PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
+				int value = (int) f.get(e.getPlayer().getDisplayName() + ".potiondrunk");
+				value++;
+				f.set(e.getPlayer().getDisplayName() + ".potiondrunk", value);
+				f.save();
+			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onPlayerKill(EntityDeathEvent e) {
-		if(e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME) {
-			PluginFile f = new PluginFile(main, e.getEntity().getKiller().getDisplayName() + ".txt");
-			int value = (int) f.get(e.getEntity().getKiller().getDisplayName() + ".monsterkilled");
-			value++; 
-			f.set(e.getEntity().getKiller().getDisplayName() + ".monsterkilled", value);
-			f.save();
+		try {
+			if (e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME) {
+				PluginFile f = new PluginFile(main, e.getEntity().getKiller().getDisplayName() + ".txt");
+				int value = (int) f.get(e.getEntity().getKiller().getDisplayName() + ".monsterkilled");
+				value++;
+				f.set(e.getEntity().getKiller().getDisplayName() + ".monsterkilled", value);
+				f.save();
+			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onDamageDealt(EntityDamageByEntityEvent e) {
-		if(e.getDamager() instanceof Player) {
-			PluginFile f = new PluginFile(main, ((Player) e.getDamager()).getDisplayName() + ".txt");
-			int value = (int) f.get(((Player) e.getDamager()).getDisplayName() + ".damagedealt");
-			value = (int) (value + e.getDamage()); 
-			f.set(((Player) e.getDamager()).getDisplayName() + ".damagedealt", value);
-			f.save();
+		try {
+			if (e.getDamager() instanceof Player) {
+				PluginFile f = new PluginFile(main, ((Player) e.getDamager()).getDisplayName() + ".txt");
+				int value = (int) f.get(((Player) e.getDamager()).getDisplayName() + ".damagedealt");
+				value = (int) (value + e.getDamage());
+				f.set(((Player) e.getDamager()).getDisplayName() + ".damagedealt", value);
+				f.save();
+			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onDamageReceived(EntityDamageByEntityEvent e) {
-		if(e.getEntity() instanceof Player) {
-			PluginFile f = new PluginFile(main, ((Player) e.getEntity()).getDisplayName() + ".txt");
-			int value = (int) f.get(((Player) e.getEntity()).getDisplayName() + ".damagereceived");
-			value = (int) (value + e.getDamage()); 
-			f.set(((Player) e.getEntity()).getDisplayName() + ".damagereceived", value);
-			f.save();
+		try {
+			if (e.getEntity() instanceof Player) {
+				PluginFile f = new PluginFile(main, ((Player) e.getEntity()).getDisplayName() + ".txt");
+				int value = (int) f.get(((Player) e.getEntity()).getDisplayName() + ".damagereceived");
+				value = (int) (value + e.getDamage());
+				f.set(((Player) e.getEntity()).getDisplayName() + ".damagereceived", value);
+				f.save();
+			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onProjectileShot(ProjectileLaunchEvent e) {
-		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player) {
-			PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
-			int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
-			int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
-			shot++; 
-			int acc = (hit*100/shot);
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot", shot);
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
-			f.save();
-		}
-		else if(e.getEntityType() == EntityType.SPLASH_POTION && e.getEntity().getShooter() instanceof Player) {
-			PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
-			int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".potionthrown");
-			value++; 
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".potionthrown", value);
-			f.save();
+		try {
+			if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player) {
+				PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
+				int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
+				int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
+				shot++;
+				int acc = (hit * 100 / shot);
+				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot", shot);
+				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
+				f.save();
+			} else if (e.getEntityType() == EntityType.SPLASH_POTION && e.getEntity().getShooter() instanceof Player) {
+				PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
+				int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".potionthrown");
+				value++;
+				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".potionthrown", value);
+				f.save();
+			}
+		} catch (Exception r) {
 		}
 	}
 	
 	@EventHandler
 	public void onArrowHit(ProjectileHitEvent e) {
-		if(e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && e.getHitEntity() != null) {
-			PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
-			int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
-			int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
-			hit++; 
-			int acc = (hit*100/shot);
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit", hit);
-			f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
-			f.save();
+		try {
+			if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player
+					&& e.getHitEntity() != null) {
+				PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
+				int hit = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit");
+				int shot = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.shot");
+				hit++;
+				int acc = (hit * 100 / shot);
+				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.hit", hit);
+				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.accuracy", acc);
+				f.save();
+			}
+		} catch (Exception r) {
+		}
+	}
+	
+	@EventHandler
+	public void onLongShot(ProjectileHitEvent e) {
+		try {
+			if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player
+					&& e.getHitEntity() != null) {
+				if(e.getHitBlock().getLocation().distance(((Player) e.getEntity().getShooter()).getLocation()) >= 50) {
+				PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
+				int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot");
+				value++;
+				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot", value);
+				}
+			}
+		} catch (Exception r) {
 		}
 	}
 }
