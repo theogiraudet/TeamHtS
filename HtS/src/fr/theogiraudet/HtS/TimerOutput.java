@@ -43,6 +43,8 @@ public class TimerOutput {
 			
 		} else if(output == "Taupe") {
 			this.main.taupeGun.SelectTaupe();
+		} else if(output == "Chest") {
+			BonusChest.setBonusChest();
 		}
 	}
 	

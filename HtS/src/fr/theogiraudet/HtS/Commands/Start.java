@@ -66,6 +66,7 @@ public class Start implements CommandExecutor {
 			Objective objective = sb.registerNewObjective("health", "health");
 			objective.setDisplayName("§4\u2764");
 			objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+			objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 			
 			if(main.isSyTState(ModState.OFF)) {
 				Bukkit.getWorld("world").setPVP(true);
@@ -166,6 +167,9 @@ public class Start implements CommandExecutor {
 				main.board.put(p, scoreboard);
 			}
 		
+		
+		Timer chest = new Timer(main, "Chest",1, 2, 3, 120, 150, 180);
+		chest.runTaskTimer(main, 20, 20);
 		
 		return true;	
 		
