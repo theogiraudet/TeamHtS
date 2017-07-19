@@ -112,7 +112,7 @@ public class Statistics implements Listener{
 			maximum.add(max);
 		}
 		for(int i = 0; i < character.size(); i++) {
-			Bukkit.broadcastMessage("§l§6" + stat.get(i));
+			Bukkit.broadcastMessage("§6§l" + stat.get(i));
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 				PluginFile f = new PluginFile(main, p.getDisplayName() + ".txt");
 				String path = p.getDisplayName() + character.get(i);
