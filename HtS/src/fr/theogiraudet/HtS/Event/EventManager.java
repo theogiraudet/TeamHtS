@@ -2,6 +2,7 @@ package fr.theogiraudet.HtS.Event;
 
 import org.bukkit.plugin.PluginManager;
 
+import fr.theogiraudet.HtS.CustomCraft;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Commands.TeamCommand;
 import fr.theogiraudet.HtS.TaupeGun.TaupeChannel;
@@ -34,6 +35,7 @@ public class EventManager {
 		pm.registerEvents(new Unclassifiable(htS), htS);
 		pm.registerEvents(new TaupeChannel(htS), htS);
 		pm.registerEvents(new HeadShot(htS), htS);
+		pm.registerEvents(new CustomCraft(htS), htS);
 	}
 	
 }
