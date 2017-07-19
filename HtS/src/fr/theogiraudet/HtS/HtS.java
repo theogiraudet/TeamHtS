@@ -12,6 +12,7 @@ import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Scoreboard;
 
 import fr.theogiraudet.HtS.Commands.CommandManager;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
@@ -30,6 +31,7 @@ public class HtS extends JavaPlugin {
 	private HtSState currentState;
 	private ModState currentSyTState;
 	private ModState currentTaupeState;
+    public Scoreboard b = Bukkit.getScoreboardManager().getNewScoreboard();
 	public List<Team> teams = new ArrayList<Team>();
 	public PlayersInGame players = new PlayersInGame();
 	public SyT stressYourTarget = new SyT(this);
