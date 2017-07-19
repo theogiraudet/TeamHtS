@@ -56,7 +56,7 @@ public class Statistics implements Listener{
 			add(".arrow.accuracy");
 		}
 	};
-	/**@SuppressWarnings("serial")
+	@SuppressWarnings("serial")
 	ArrayList<String> stat = new ArrayList<String>() {
 		{
 			add("Déconnexion:");
@@ -71,12 +71,12 @@ public class Statistics implements Listener{
 			add("Potion Lancée");
 			add("Mob tué:");
 			add("Dégât Fait:");
-			add("Dégât Reçu");
-			add("Fléche Tirée");
-			add("Flèche Touchée");
+			add("Dégât Reçu:");
+			add("Fléche Tirée:");
+			add("Flèche Touchée:");
 			add("Précision:");
 		}
-	};**/
+	};
 	
 	public Statistics(HtS htS) {
 		this.main = htS;
@@ -97,6 +97,8 @@ public class Statistics implements Listener{
 	}
 	
 	public void getStatistics() {
+		PluginFile g = new PluginFile(main, "general.txt");
+		Bukkit.broadcastMessage("La partie a durée: " + (String) g.get("time"));
 		for(int i = 0; i < character.size(); i++) {
 			ArrayList<Integer> array = new ArrayList<>();
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
@@ -110,14 +112,15 @@ public class Statistics implements Listener{
 			maximum.add(max);
 		}
 		for(int i = 0; i < character.size(); i++) {
+			Bukkit.broadcastMessage("§l§6" + stat.get(i));
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 				PluginFile f = new PluginFile(main, p.getDisplayName() + ".txt");
 				String path = p.getDisplayName() + character.get(i);
 				if(maximum.get(i) == f.get(path)) {
-					Bukkit.broadcastMessage(ChatColor.GREEN + "MAXIMUM." + p.getDisplayName() + character.get(i) + ": " + maximum.get(i));
+					Bukkit.broadcastMessage(ChatColor.GREEN + p.getDisplayName() + ": " + maximum.get(i));
 				}
 				if(minimum.get(i) == f.get(path)) {
-					Bukkit.broadcastMessage(ChatColor.RED + "minimum." + p.getDisplayName() + character.get(i) + ": " + minimum.get(i));
+					Bukkit.broadcastMessage(ChatColor.RED + p.getDisplayName() + ": " + minimum.get(i));
 				}
 			}
 		}
