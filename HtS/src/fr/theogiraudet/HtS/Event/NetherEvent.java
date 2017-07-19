@@ -50,14 +50,14 @@ public class NetherEvent implements Listener{
         if(e.getEntityType() == EntityType.SHULKER){
         	ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
             e.getDrops().clear();
-            if(Randomizer.RandRate(15)){
+            if(Randomizer.RandRate(7)){
                 ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
                 EnchantmentStorageMeta esm = (EnchantmentStorageMeta) book.getItemMeta();
                 esm.addStoredEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 4, true);
                 book.setItemMeta(esm);
                 drops.add(book);
             }
-            if(Randomizer.RandRate(25)) {
+            if(Randomizer.RandRate(15)) {
             	drops.add(new ItemStackManager(Material.SHULKER_SHELL, (short) 0, 1, "§rShulker Shell", "A un pourcentage de chance de bloquer un coup. 3 utilisations.").getItemStack());
             }
             e.getDrops().addAll(drops);
