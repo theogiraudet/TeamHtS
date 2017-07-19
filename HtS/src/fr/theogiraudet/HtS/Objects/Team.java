@@ -17,7 +17,6 @@ public class Team {
     private String teamName;
     private String teamColor;
     private List<String> teamPlayers = new ArrayList<>();
-    private int teamSize;
     private Byte teamWool;
     
     private org.bukkit.scoreboard.Team team;
@@ -41,7 +40,7 @@ public class Team {
     }
     
     public int getTeamSize(){
-        return teamSize;
+        return team.getSize();
     }
     
     public Byte getWoolData(){
@@ -58,7 +57,6 @@ public class Team {
     
     public void addPlayer(String player){
         team.addEntry(player);
-        teamSize = team.getSize();
         teamPlayers.add(player);
         Bukkit.getPlayer(player).setScoreboard(HtS.b);
     }
@@ -69,7 +67,7 @@ public class Team {
     }
     
     public void clearTeam(){
-        for(int i=0; i<=teamSize; i++){
+        for(int i=0; i<=team.getSize(); i++){
             team.removeEntry(teamPlayers.get(i));
         }
         teamPlayers.clear();

@@ -64,7 +64,6 @@ public class HtS extends JavaPlugin {
 		
 		EventManager.loadEvents(this);
 		CommandManager.loadCommands(this);
-
 		
 }
 
