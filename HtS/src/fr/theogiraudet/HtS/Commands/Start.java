@@ -109,6 +109,8 @@ public class Start implements CommandExecutor {
 					
 				}
 			} else {
+				Statistics s = new Statistics(main);
+				s.createFiles();
 				for(Team t : main.getTeams()) {
 					
 					Location loc = teleport();

@@ -56,6 +56,27 @@ public class Statistics implements Listener{
 			add(".arrow.accuracy");
 		}
 	};
+	/**@SuppressWarnings("serial")
+	ArrayList<String> stat = new ArrayList<String>() {
+		{
+			add("Déconnexion:");
+			add("Temps Accroupi:");
+			add("Portail Pris:");
+			add("Diamant:");
+			add("Or:");
+			add("Item ramassé:");
+			add("Enchantement Fait:");
+			add("Pomme d'or:");
+			add("Potion Bue:");
+			add("Potion Lancée");
+			add("Mob tué:");
+			add("Dégât Fait:");
+			add("Dégât Reçu");
+			add("Fléche Tirée");
+			add("Flèche Touchée");
+			add("Précision:");
+		}
+	};**/
 	
 	public Statistics(HtS htS) {
 		this.main = htS;
@@ -76,8 +97,6 @@ public class Statistics implements Listener{
 	}
 	
 	public void getStatistics() {
-		PluginFile g = new PluginFile(main, "general.txt");
-		Bukkit.broadcastMessage("La partie a durée : " + g.get("time"));
 		for(int i = 0; i < character.size(); i++) {
 			ArrayList<Integer> array = new ArrayList<>();
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
