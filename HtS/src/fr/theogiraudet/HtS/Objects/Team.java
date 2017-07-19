@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scoreboard.Scoreboard;
 
 import fr.theogiraudet.HtS.HtS;
 import net.md_5.bungee.api.ChatColor;
@@ -21,16 +20,14 @@ public class Team {
     private int teamSize;
     private Byte teamWool;
     
-    private Scoreboard board;
-    private org.bukkit.scoreboard.Team team = board.registerNewTeam("unknown");
+    private org.bukkit.scoreboard.Team team;
     
     public Team(String name, String color, Byte wooldata, HtS main){
-        board = main.b;
     	teamName = name;
         teamColor = color.toUpperCase();
         teamWool = wooldata;
         
-        team = board.registerNewTeam(teamName);
+        team = HtS.b.registerNewTeam(teamName);
         team.setPrefix("[" + ChatColor.valueOf(teamColor) + teamName + "§r] ");
       //  team.setColor(ChatColor.valueOf(teamColor));
     }
@@ -63,7 +60,7 @@ public class Team {
         team.addEntry(player);
         teamSize = team.getSize();
         teamPlayers.add(player);
-        Bukkit.getPlayer(player).setScoreboard(board);
+        Bukkit.getPlayer(player).setScoreboard(HtS.b);
     }
     
     public void removePlayer(String player){
@@ -86,7 +83,7 @@ public class Team {
     }
     
     public void setScoreboard(Player p) {
-    	p.setScoreboard(board);
+    	p.setScoreboard(HtS.b);
     }
         
     public ItemStack getIcon()

@@ -31,7 +31,7 @@ public class HtS extends JavaPlugin {
 	private HtSState currentState;
 	private ModState currentSyTState;
 	private ModState currentTaupeState;
-    public Scoreboard b = Bukkit.getScoreboardManager().getNewScoreboard();
+    public static Scoreboard b = Bukkit.getScoreboardManager().getNewScoreboard();
 	public List<Team> teams = new ArrayList<Team>();
 	public PlayersInGame players = new PlayersInGame();
 	public SyT stressYourTarget = new SyT(this);
