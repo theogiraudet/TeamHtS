@@ -3,6 +3,7 @@ package fr.theogiraudet.HtS.Event;
 import org.bukkit.Material;
 import org.bukkit.plugin.PluginManager;
 
+import fr.theogiraudet.HtS.CustomCraft;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Commands.TeamCommand;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
@@ -42,7 +43,8 @@ public class EventManager {
 		pm.registerEvents(new CustomInventoryEvent(htS), htS);
 
 		pm.registerEvents(new Test(), htS);
-		pm.registerEvents(new Sword(new ItemStackManager(Material.DIAMOND_SWORD, (short) 0, 1, "Épée","§2Activé", true)), htS);
+		pm.registerEvents(new Sword(new ItemStackManager(Material.DIAMOND_SWORD, (short) 0, 1, "Épée", "§2Activé", true)), htS);
+		pm.registerEvents(new CustomCraft(htS), htS);
 	}
 
 }
