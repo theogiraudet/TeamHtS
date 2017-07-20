@@ -24,6 +24,7 @@ import net.md_5.bungee.api.ChatColor;
 public class MobFriendEvent implements Listener{
 
 	private HtS main;
+	private boolean mobfriend = false;
 	
 	public MobFriendEvent(HtS htS) {
 		this.main = htS;
@@ -31,35 +32,50 @@ public class MobFriendEvent implements Listener{
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onMobTarget(EntityTargetLivingEntityEvent e){
-		if(e.getTarget() instanceof Player){
-			if(e.getEntity().getCustomName() != null){	
-				if(e.getEntity().getCustomName() == main.getTeam((Player) e.getTarget()).getTeamName())
-					e.setCancelled(true);
+		if (mobfriend) {
+			if (e.getTarget() instanceof Player) {
+				if (e.getEntity().getCustomName() != null) {
+					if (e.getEntity().getCustomName() == main.getTeam((Player) e.getTarget()).getTeamName())
+						e.setCancelled(true);
+				}
 			}
-		}	
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onMobSpawn(PlayerInteractEvent e){
-		if(e.getPlayer().getItemInHand().getType() == Material.MONSTER_EGG && e.getItem().getItemMeta().hasDisplayName() && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			e.setCancelled(true);
-			Entity mob = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.fromName(e.getItem().getItemMeta().getDisplayName().split(": ")[1]));
-			mob.setCustomNameVisible(false);
-			mob.setCustomName(main.getTeam(e.getPlayer()).getTeamName());
-			e.getPlayer().getItemInHand().setAmount(e.getPlayer().getItemInHand().getAmount()-1);
+		if (mobfriend ) {
+			if (e.getPlayer().getItemInHand().getType() == Material.MONSTER_EGG
+					&& e.getItem().getItemMeta().hasDisplayName() && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+				e.setCancelled(true);
+				Entity mob = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(),
+						EntityType.fromName(e.getItem().getItemMeta().getDisplayName().split(": ")[1]));
+				mob.setCustomNameVisible(false);
+				mob.setCustomName(main.getTeam(e.getPlayer()).getTeamName());
+				e.getPlayer().getItemInHand().setAmount(e.getPlayer().getItemInHand().getAmount() - 1);
+			}
 		}
 	}
 	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onMobDeath(EntityDeathEvent e){
-		if(e.getEntity().getCustomName() == null && (e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME) && e.getEntity().getKiller() instanceof Player && main.players.isPlayerInGame(e.getEntity().getKiller().getUniqueId())){
-			if(Randomizer.RandRate(10)){
+		if (mobfriend) {
+			if (e.getEntity().getCustomName() == null
+					&& (e.getEntity() instanceof Monster || e.getEntityType() == EntityType.SLIME)
+					&& e.getEntity().getKiller() instanceof Player
+					&& main.players.isPlayerInGame(e.getEntity().getKiller().getUniqueId())) {
+				if (Randomizer.RandRate(10)) {
 					ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
-					drops.add(new ItemStackManager(Material.MONSTER_EGG, e.getEntityType().getTypeId(), 1, ChatColor.GREEN + main.getTeam(e.getEntity().getKiller()).getTeamName() + " a un appel à un : " + e.getEntity().getName(), "Fait apparaître un monstre qui combattra à vos côtés (il ne vous suivera pas).").getItemStack());
+					drops.add(new ItemStackManager(Material.MONSTER_EGG, e.getEntityType().getTypeId(), 1,
+							ChatColor.GREEN + main.getTeam(e.getEntity().getKiller()).getTeamName()
+									+ " a un appel à un : " + e.getEntity().getName(),
+							"Fait apparaître un monstre qui combattra à vos côtés (il ne vous suivera pas).")
+									.getItemStack());
 					e.getDrops().addAll(drops);
-			}	
+				}
+			}
 		}
 	}
 }
