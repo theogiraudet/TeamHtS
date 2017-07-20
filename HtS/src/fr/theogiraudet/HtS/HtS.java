@@ -28,6 +28,8 @@ import fr.theogiraudet.SyT.SyT;
 
 public class HtS extends JavaPlugin {
 
+	public final String htsEdition = "HtS XI";
+	
 	private HtSState currentState;
 	private ModState currentSyTState;
 	private ModState currentTaupeState;
