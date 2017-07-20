@@ -281,7 +281,7 @@ public class Statistics implements Listener{
 	
 	@EventHandler
 	public void onPlayerPlayerKill(PlayerDeathEvent e) {
-		if(main.isState(HtSState.RUNNING) || main.isState(HtSState.FINISHING)) {
+		if(main.isState(HtSState.RUNNING)) {
 			if (e.getEntity() instanceof Player) {
 				PluginFile f = new PluginFile(main, e.getEntity().getKiller().getDisplayName() + ".txt");
 				int value = (int) f.get(e.getEntity().getKiller().getDisplayName() + ".playerkilled");
