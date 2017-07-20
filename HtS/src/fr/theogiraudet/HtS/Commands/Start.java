@@ -29,6 +29,7 @@ import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.Randomizer;
+import fr.theogiraudet.HtS.Objects.ScoreBoard;
 import fr.theogiraudet.HtS.Objects.Team;
 
 
@@ -142,29 +143,20 @@ public class Start implements CommandExecutor {
 					sign.getValue().setLine(12, "§o" + dateformat.format(timer));
 				}
 				timerGame = dateformat.format(timer);
-				
-				
+				ScoreBoard.sendTimer(main);
 				}
 				
 			},20,20);
 			
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
-				ScoreboardSign scoreboard = new ScoreboardSign(p, "§l§6HtS X");
-				scoreboard.create();
-				scoreboard.setLine(5, "§4Joueurs : ");
-				scoreboard.setLine(6, "§o" + main.players.getPlayersInGame().size());
-				//if(!main.teams.isEmpty()) {
-					//scoreboard.setLine(7, "§4Teams : ");
-					//scoreboard.setLine(8, "§o" + main.teams.size());
-				//}
-				scoreboard.setLine(9, "§4Kills : ");
-				scoreboard.setLine(10, "§o" + p.getStatistic(Statistic.PLAYER_KILLS));
-				scoreboard.setLine(11, "§4Timer : ");
-				scoreboard.setLine(12, "§o" + "00:00:00");
-				scoreboard.setLine(13, "§4Bordure : ");
-				scoreboard.setLine(14, "§o" + (int)Bukkit.getWorld("world").getWorldBorder().getSize() + " * " + ((int)Bukkit.getWorld("world").getWorldBorder().getSize()) + "");
-				main.board.put(p, scoreboard);
+				ScoreBoard.sendScoreboard(p, main);
+				ScoreBoard.sendPlayers(main);
+				if(!main.teams.isEmpty()) {
+					ScoreBoard.sendTeams(main);
+				}
+				ScoreBoard.sendKills(main);
+				ScoreBoard.sendBorder(main);
 			}
 		
 		
