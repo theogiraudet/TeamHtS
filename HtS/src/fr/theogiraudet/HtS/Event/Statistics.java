@@ -196,7 +196,7 @@ public class Statistics implements Listener{
 		if(main.isState(HtSState.RUNNING)) {
 			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
 			int value = (int) f.get(e.getPlayer().getDisplayName() + ".logout");
-			value = value + 1;
+			value = value++;
 			f.set(e.getPlayer().getDisplayName() + ".logout", value);
 			f.save();
 		}
@@ -238,7 +238,7 @@ public class Statistics implements Listener{
 				} else if (e.getBlock().getType() == Material.GOLD_ORE) {
 					PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
 					int value = (int) f.get(e.getPlayer().getDisplayName() + ".gold");
-					value = value + 1;
+					value = value++;
 					f.set(e.getPlayer().getDisplayName() + ".gold", value);
 					f.save();
 				}

@@ -11,6 +11,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.theogiraudet.HtS.HtS;
+import fr.theogiraudet.HtS.Enumeration.HtSState;
+import fr.theogiraudet.HtS.Objects.PluginFile;
 
 public class HeadShot implements Listener {
     
@@ -33,9 +35,16 @@ public class HeadShot implements Listener {
 				
 				if(headshot) {
 					Player p = (Player) e.getEntity();
-					p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1*20, 255));
-					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2*20, 255));
-					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 10, 255));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 255));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 50, 255));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 30, 255));
+					if(main.isState(HtSState.RUNNING)) {
+						PluginFile f = new PluginFile(main, ((Player) proj.getShooter()).getDisplayName() + ".txt");
+						int value = (int) f.get(((Player) proj.getShooter()).getDisplayName() + ".arrow.headshot");
+						value = value++;
+						f.set(((Player) proj.getShooter()).getDisplayName() + ".logout", value);
+						f.save();
+					}
 				}
 			}
 		}
