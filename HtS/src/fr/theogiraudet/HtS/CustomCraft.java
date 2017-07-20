@@ -4,15 +4,17 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 public class CustomCraft implements Listener{
 	
+	@SuppressWarnings("unused")
 	private HtS main;
 
+	
 	public CustomCraft(HtS htS) {
 		this.main = htS;
 	}
@@ -28,24 +30,29 @@ public class CustomCraft implements Listener{
 	}
 	
 	@EventHandler
-    public void craft(CraftItemEvent e){
+	public void craft(PrepareItemCraftEvent e) {
 		if (e.getInventory() instanceof CraftingInventory) {
 			CraftingInventory inv = (CraftingInventory) e.getInventory();
-			if (inv.getSize() != 4 && e.getRecipe().equals(Elytra(main))) {
-				org.bukkit.inventory.ItemStack lwing = inv.getMatrix()[4];
-				org.bukkit.inventory.ItemStack rwing = inv.getMatrix()[6];
-				if (rwing.hasItemMeta() && lwing.hasItemMeta()) {
-					if (rwing.getItemMeta().getEnchants() == Enchantment.PROTECTION_FALL
-							&& lwing.getItemMeta().getEnchants() == Enchantment.PROTECTION_FALL) {
+			if (e.getRecipe().getResult().equals(new ItemStack(Material.ELYTRA))) {
+				if (inv.getMatrix()[3] != null && inv.getMatrix()[4] != null && inv.getMatrix()[5] != null) {
+					org.bukkit.inventory.ItemStack lwing = inv.getMatrix()[3];
+					org.bukkit.inventory.ItemStack rwing = inv.getMatrix()[5];
+					org.bukkit.inventory.ItemStack string = inv.getMatrix()[4];
+					if (rwing.hasItemMeta() && lwing.hasItemMeta()) {
+						if (rwing.containsEnchantment(Enchantment.PROTECTION_FALL)
+								&& lwing.containsEnchantment(Enchantment.PROTECTION_FALL)
+								&& string.getType() == Material.STRING) {
+							inv.setResult(new ItemStack(Material.ELYTRA));
+						} else {
+							inv.setResult(new ItemStack(Material.AIR));
+						}
 					} else {
-						e.setCancelled(true);
-						e.setResult(null);
+						inv.setResult(new ItemStack(Material.AIR));
 					}
 				} else {
-					e.setCancelled(true);
-					e.setResult(null);
+					inv.setResult(new ItemStack(Material.AIR));
 				}
 			}
 		}
-	}	
+	}
 }
