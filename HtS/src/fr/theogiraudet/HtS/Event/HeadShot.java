@@ -35,6 +35,7 @@ public class HeadShot implements Listener {
 					Player p = (Player) e.getEntity();
 					p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 1*20, 255));
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 2*20, 255));
+					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 10, 255));
 				}
 			}
 		}

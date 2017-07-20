@@ -3,7 +3,6 @@ package fr.theogiraudet.HtS.Commands;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -23,7 +22,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.theogiraudet.HtS.HtS;
-import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Timer;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
@@ -115,6 +113,7 @@ public class Start implements CommandExecutor {
 					
 					for(UUID uuid : t.getTeamPlayers()) {
 						Player p = Bukkit.getServer().getPlayer(uuid);
+						p.setStatistic(Statistic.SNEAK_TIME, 0);
 						p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
 						p.setHealth(20);
 						p.setFoodLevel(20);
@@ -136,14 +135,12 @@ public class Start implements CommandExecutor {
 				public void run() {	
 					
 					if(main.isState(HtSState.FINISHING)) {
+						Bukkit.getScheduler().cancelAllTasks();;
 					}
 					
 					timer = timer.plusSeconds(1);
-				for(Entry<Player, ScoreboardSign> sign : main.board.entrySet()) {
-					sign.getValue().setLine(12, "§o" + dateformat.format(timer));
-				}
-				timerGame = dateformat.format(timer);
-				ScoreBoard.sendTimer(main);
+					timerGame = dateformat.format(timer);
+					ScoreBoard.sendTimer(main);
 				}
 				
 			},20,20);

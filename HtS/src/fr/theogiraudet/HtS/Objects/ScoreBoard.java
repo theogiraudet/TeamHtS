@@ -3,7 +3,6 @@ package fr.theogiraudet.HtS.Objects;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Statistic;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
@@ -24,7 +23,7 @@ public class ScoreBoard {
 	private static ScoreboardObjective obj;
 	private static PacketPlayOutScoreboardObjective removepacket,createpacket;
 	private static PacketPlayOutScoreboardDisplayObjective display;
-	private static String s1 = "0 P", s3 = "0 E", s7 = "§o00:00:00", s9 = "§o1000*1000";
+	private static String s1 = "0 ", s3 = "0§l", s7 = "§o00:00:00", s9 = "§o1000*1000";
 	private static HashMap<String, Integer> kill = new HashMap<String, Integer>();
 	private static ScoreboardScore l2,l3;
 	private static PacketPlayOutScoreboardScore p2,p3;	
@@ -48,7 +47,7 @@ public class ScoreBoard {
 			l3 = new ScoreboardScore(board, obj, s3);
 		}
 		ScoreboardScore l4 = new ScoreboardScore(board, obj, "§4Tuer:");
-		ScoreboardScore l5 = new ScoreboardScore(board, obj, String.valueOf(kill.get(p.getDisplayName())) + " T");
+		ScoreboardScore l5 = new ScoreboardScore(board, obj, String.valueOf(kill.get(p.getDisplayName())));
 		ScoreboardScore l6 = new ScoreboardScore(board, obj, "§4Timer:");
 		ScoreboardScore l7 = new ScoreboardScore(board, obj, s7);
 		ScoreboardScore l8 = new ScoreboardScore(board, obj, "§4Bordure:");
@@ -105,14 +104,14 @@ public class ScoreBoard {
 	//Packet Method
 	
 	public static void sendPlayers(HtS main) {
-		s1 = String.valueOf(main.players.getPlayersInGame().size()) + " J";
+		s1 = String.valueOf(main.players.getPlayersInGame().size()) + " ";
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 			sendScoreboard(p, main);
 		}
 	}
 	
 	public static void sendTeams(HtS main) {
-		s3 = String.valueOf(main.teams.size()) + " E";
+		s3 = String.valueOf(main.teams.size()) + "§l";
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 			sendScoreboard(p, main);
 		}
@@ -120,7 +119,8 @@ public class ScoreBoard {
 	
 	public static void sendKills(HtS main) {
 		for(Player p: Bukkit.getServer().getOnlinePlayers()) {
-			kill.put(p.getDisplayName(), p.getStatistic(Statistic.PLAYER_KILLS));
+			PluginFile f = new PluginFile(main, p.getDisplayName() + ".txt");
+			kill.put(p.getDisplayName(), (int) f.get(p.getDisplayName() + ".playerkilled"));
 			sendScoreboard(p, main);
 		}
 	}

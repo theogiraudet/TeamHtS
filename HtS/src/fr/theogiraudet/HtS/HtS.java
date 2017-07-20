@@ -3,7 +3,6 @@ package fr.theogiraudet.HtS;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -28,7 +27,7 @@ import fr.theogiraudet.SyT.SyT;
 
 public class HtS extends JavaPlugin {
 
-	public final String htsEdition = "HtS XI";
+	public final String htsEdition = "§6§lHtS XII";
 	
 	private HtSState currentState;
 	private ModState currentSyTState;
@@ -38,7 +37,6 @@ public class HtS extends JavaPlugin {
 	public PlayersInGame players = new PlayersInGame();
 	public SyT stressYourTarget = new SyT(this);
 	public TaupeGun taupeGun = new TaupeGun(this);
-	public Map<Player, ScoreboardSign> board = new HashMap<>();
 	public HashMap<Player, UUID> uuidPlayer = new HashMap<>();
 	
 	public HashMap<String, String> recap = new HashMap<>();

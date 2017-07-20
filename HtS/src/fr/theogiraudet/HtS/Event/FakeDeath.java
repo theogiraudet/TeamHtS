@@ -1,12 +1,9 @@
 package fr.theogiraudet.HtS.Event;
 
-import java.util.Map.Entry;
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.Statistic;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
@@ -18,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import fr.theogiraudet.HtS.HtS;
-import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Objects.DeathEntityLoot;
@@ -75,15 +71,6 @@ public class FakeDeath implements Listener {
 				main.setState(HtSState.FINISHING);
 				s.gameTime();
 				s.getStatistics();
-			}
-			
-			if(p.getKiller() instanceof Player) {
-				if(main.board.containsKey(p.getKiller())) {
-					main.board.get(p.getKiller()).setLine(10, "§o" + p.getStatistic(Statistic.PLAYER_KILLS));
-				}
-			}
-			for(Entry<Player, ScoreboardSign> sign : main.board.entrySet()) {
-				sign.getValue().setLine(6, "§o" + main.players.getPlayersInGame().size());
 			}
 		}
 	}
