@@ -133,6 +133,10 @@ public class Start implements CommandExecutor {
 				
 				@Override
 				public void run() {	
+					
+					if(main.isState(HtSState.FINISHING)) {
+					}
+					
 					timer = timer.plusSeconds(1);
 				for(Entry<Player, ScoreboardSign> sign : main.board.entrySet()) {
 					sign.getValue().setLine(12, "§o" + dateformat.format(timer));
@@ -164,7 +168,7 @@ public class Start implements CommandExecutor {
 			}
 		
 		
-		Timer chest = new Timer(main, "Chest", 180, 1, 2, 3, 150, 180);
+		Timer chest = new Timer(main, "Chest", 180, 30, 60, 90, 120, 150);
 		chest.runTaskTimer(main, 20, 20);
 		
 		return true;	

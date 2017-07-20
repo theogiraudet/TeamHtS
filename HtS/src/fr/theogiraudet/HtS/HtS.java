@@ -48,6 +48,7 @@ public class HtS extends JavaPlugin {
 		Bukkit.getWorld("world").setDifficulty(Difficulty.HARD);
 		Bukkit.getWorld("world_nether").setDifficulty(Difficulty.HARD);
 		Bukkit.getWorld("world_the_end").setDifficulty(Difficulty.HARD);
+		System.out.println(Bukkit.getWorlds());
 		Bukkit.getWorld("world").setPVP(false);
 		Bukkit.getWorld("world").setSpawnLocation(0, 205, 0);
 		Bukkit.setSpawnRadius(0);

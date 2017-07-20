@@ -2,6 +2,8 @@ package fr.theogiraudet.HtS;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
+import fr.theogiraudet.HtS.Enumeration.HtSState;
+
 public class Timer extends BukkitRunnable {
 
 	 HtS main;
@@ -29,6 +31,9 @@ public class Timer extends BukkitRunnable {
 
 	@Override
 	public void run() {
+		if(main.isState(HtSState.FINISHING)) {
+			this.cancel();
+		}
 		increment++;
 		if(prevent != null) {
 			if(prevent.length != 0) {
