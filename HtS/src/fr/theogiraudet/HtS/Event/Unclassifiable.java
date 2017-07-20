@@ -48,5 +48,6 @@ public class Unclassifiable implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		ScoreBoard.sendKills(main);
 		ScoreBoard.sendPlayers(main);
+		if(!main.teams.isEmpty()) {ScoreBoard.sendTeams(main);}
 	}
 }
