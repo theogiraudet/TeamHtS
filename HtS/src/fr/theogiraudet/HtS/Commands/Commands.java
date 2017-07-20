@@ -20,6 +20,7 @@ import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.Inventaire;
+import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.ScoreBoard;
 
@@ -53,7 +54,7 @@ public class Commands implements CommandExecutor {
 					}
 				 return true;
 					
-				}
+			}
 			
 			
 			else if (cmd.getName().equalsIgnoreCase("remove") && sender.hasPermission("remove.use") && args.length >= 1
@@ -130,11 +131,14 @@ public class Commands implements CommandExecutor {
 				z = isNegative * (0 + Randomizer.Rand((int) Math.floor(border.getSize()/2 - 0)));
 				sender.sendMessage(x + " " + z);
 				
+			} else if(cmd.getName().equalsIgnoreCase("statistics") && sender.hasPermission("statistics.use")) {
+					Statistics s = new Statistics(main);
+					s.getPlayerStatistics((Player) sender);
+				return true;
 			}
 			
-			}
-			
-		return false;
+		return true;
 		}
+	return false;
 	}
-
+}

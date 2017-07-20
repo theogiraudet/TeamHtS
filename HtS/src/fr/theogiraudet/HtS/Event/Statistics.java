@@ -103,6 +103,14 @@ public class Statistics implements Listener{
 		}
 	}
 	
+	public void getPlayerStatistics(Player p) {
+		PluginFile f = new PluginFile(main, p.getDisplayName() + ".txt");
+		for (int i = 0; i < character.size(); i++) {
+			p.sendMessage("§6§l" + stat.get(i));
+			p.sendMessage(String.valueOf(f.get(p.getDisplayName() + character.get(i))));
+		}
+	}
+	
 	public void getStatistics() {
 		PluginFile g = new PluginFile(main, "general.txt");
 		Bukkit.broadcastMessage("La partie a durée: " + (String) g.get("time"));
