@@ -22,6 +22,7 @@ public class CommandManager {
 		htS.getCommand("players").setExecutor(new Commands(htS));
 		htS.getCommand("random").setExecutor(new Commands(htS));
 		htS.getCommand("reveal").setExecutor(new RevealCommand(htS));
+		htS.getCommand("statistics").setExecutor(new Commands(htS));
 	}
 	
 }

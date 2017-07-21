@@ -1,7 +1,6 @@
 package fr.theogiraudet.HtS.Commands;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -18,11 +17,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import fr.theogiraudet.HtS.HtS;
-import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
+import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Event.Option.Inventaire;
 import fr.theogiraudet.HtS.Objects.Randomizer;
+import fr.theogiraudet.HtS.Objects.ScoreBoard;
 
 public class Commands implements CommandExecutor {
 	
@@ -47,16 +47,14 @@ public class Commands implements CommandExecutor {
 					 target.teleport(new Location(target.getWorld(), target.getLocation().getX(), 256, target.getLocation().getZ()));
 					 target.setGameMode(GameMode.SURVIVAL);
 					 target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 3 * 20, 255, false, false));
-					 for(Entry<Player, ScoreboardSign> sign : main.board.entrySet()) {
-							sign.getValue().setLine(6, "§o" + main.players.getPlayersInGame().size());
-						}
+					 ScoreBoard.sendPlayers(main);
 				 
 				 } else {
 					sender.sendMessage("§4Ce joueur n'existe pas !");
 					}
 				 return true;
 					
-				}
+			}
 			
 			
 			else if (cmd.getName().equalsIgnoreCase("remove") && sender.hasPermission("remove.use") && args.length >= 1
@@ -65,9 +63,7 @@ public class Commands implements CommandExecutor {
 				for (HashMap.Entry<Player, UUID> entry : main.uuidPlayer.entrySet()) {
 					if (entry.getKey().getName() == name) {
 						main.players.removePlayer(entry.getValue());
-						for (Entry<Player, ScoreboardSign> sign : main.board.entrySet()) {
-							sign.getValue().setLine(6, "§o" + main.players.getPlayersInGame().size());
-						}
+						ScoreBoard.sendPlayers(main);
 						if (main.isSyTState(ModState.PRORAND)) {
 							main.stressYourTarget.removePlayer(entry.getKey());
 						}
@@ -135,11 +131,14 @@ public class Commands implements CommandExecutor {
 				z = isNegative * (0 + Randomizer.Rand((int) Math.floor(border.getSize()/2 - 0)));
 				sender.sendMessage(x + " " + z);
 				
+			} else if(cmd.getName().equalsIgnoreCase("statistics") && sender.hasPermission("statistics.use")) {
+					Statistics s = new Statistics(main);
+					s.getPlayerStatistics((Player) sender);
+				return true;
 			}
 			
-			}
-			
-		return false;
+		return true;
 		}
+	return false;
 	}
-
+}

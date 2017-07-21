@@ -21,10 +21,10 @@ public class Team {
     
     private org.bukkit.scoreboard.Team team;
     
-    public Team(String name, String color, Byte wooldata, HtS main){
+    public Team(String name, String color, HtS main){
     	teamName = name;
         teamColor = color.toUpperCase();
-        teamWool = wooldata;
+        teamWool = getWoolByte(color);
         
         team = HtS.b.registerNewTeam(teamName);
         team.setPrefix("[" + ChatColor.valueOf(teamColor) + teamName + "§r] ");
@@ -89,5 +89,44 @@ public class Team {
     {
       ItemStackManager wool = new ItemStackManager(Material.WOOL, this.teamWool, 1, "§rRejoindre l'équipe " + ChatColor.valueOf(teamColor) + this.teamName);
       return wool.getItemStack();
+    }
+    
+    //Wool Data
+    private byte getWoolByte(String color) {	
+    	switch(color) {
+    		case "white":
+    			return 0;
+    		case "gold":
+    			return 1;
+    		case "dark_red":
+    			return 2;
+    		case "aqua":
+    			return 3;
+    		case "yellow":
+    			return 4;
+    		case "green":
+    			return 5;
+    		case "light_purple":
+    			return 6;
+    		case "dark_gray":
+    			return 7;
+    		case "gray":
+    			return 8;
+    		case "dark_aqua":
+    			return 9;
+    		case "dark_purple":
+    			return 10;
+    		case "dark_blue":
+    			return 11;
+    		case "brown":
+    			return 12;
+    		case "dark_green":
+    			return 13;
+    		case "red":
+    			return 14;
+    		case "black":
+    			return 15;
+    	}
+    	return 0;	
     }
 }

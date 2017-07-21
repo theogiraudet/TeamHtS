@@ -1,20 +1,24 @@
-package fr.theogiraudet.HtS.Event.StaticEvent;
+package fr.theogiraudet.HtS.Event;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Objects.Randomizer;
+import fr.theogiraudet.HtS.Objects.ScoreBoard;
 
 public class Unclassifiable implements Listener {
 	
-	public Unclassifiable(HtS htS) { }
+	private HtS main;
+
+	public Unclassifiable(HtS htS) { this.main = htS; }
 
 	@EventHandler
 	public void onDropNuggets(PlayerBucketFillEvent e) {
@@ -39,4 +43,11 @@ public class Unclassifiable implements Listener {
 		}
 	}
 
+	//Player Death Scoreboard Update
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent e) {
+		ScoreBoard.sendKills(main);
+		ScoreBoard.sendPlayers(main);
+		if(!main.teams.isEmpty()) {ScoreBoard.sendTeams(main);}
+	}
 }
