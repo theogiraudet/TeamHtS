@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -84,8 +85,9 @@ public class SyT implements Listener, CommandExecutor {
 			player.sendMessage("§4Votre cible est " + getVictim(player).getName() + ".");
 		}
 		main.setSyTState(ModState.PRORAND);
-		Bukkit.getWorld("world").setPVP(true);
-		Bukkit.getWorld("world_nether").setPVP(true);
+		for(World world : Bukkit.getWorlds()) {
+			world.setPVP(true);
+		}
 		
 	 }
 	 

@@ -2,8 +2,8 @@ package fr.theogiraudet.HtS;
 
 import org.bukkit.Bukkit;
 
-import fr.theogiraudet.HtS.Event.DepthBreath;
-import fr.theogiraudet.HtS.Event.MobFixe;
+import fr.theogiraudet.HtS.Event.Option.Mobs.MobFixe;
+import fr.theogiraudet.HtS.Event.Option.Time.DepthBreath;
 
 public class TimerOutput {
 	

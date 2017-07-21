@@ -1,8 +1,8 @@
 package fr.theogiraudet.HtS.Commands;
 
 import fr.theogiraudet.HtS.HtS;
-import fr.theogiraudet.HtS.TaupeGun.RevealCommand;
 import fr.theogiraudet.SyT.SyT;
+import fr.theogiraudet.TaupeGun.RevealCommand;
 
 public class CommandManager {
 	

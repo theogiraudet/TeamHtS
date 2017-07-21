@@ -19,8 +19,8 @@ import org.bukkit.potion.PotionEffectType;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
-import fr.theogiraudet.HtS.Event.Inventaire;
-import fr.theogiraudet.HtS.Event.Statistics;
+import fr.theogiraudet.HtS.Event.Option.Inventaire;
+import fr.theogiraudet.HtS.Event.StaticEvent.Statistics;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.ScoreBoard;
 
