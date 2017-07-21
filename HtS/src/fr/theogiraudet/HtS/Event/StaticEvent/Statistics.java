@@ -1,4 +1,4 @@
-package fr.theogiraudet.HtS.Event;
+package fr.theogiraudet.HtS.Event.StaticEvent;
 
 import java.util.ArrayList;
 import java.util.List;

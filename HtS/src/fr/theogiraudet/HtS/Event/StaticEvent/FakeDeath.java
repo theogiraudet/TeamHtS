@@ -1,4 +1,4 @@
-package fr.theogiraudet.HtS.Event;
+package fr.theogiraudet.HtS.Event.StaticEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -17,7 +17,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
-import fr.theogiraudet.HtS.Event.Statistics;
 import fr.theogiraudet.HtS.Objects.DeathEntityLoot;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
 import fr.theogiraudet.HtS.Objects.Team;

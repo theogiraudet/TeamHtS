@@ -1,4 +1,4 @@
-package fr.theogiraudet.HtS.Event;
+package fr.theogiraudet.HtS.Event.StaticEvent;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
