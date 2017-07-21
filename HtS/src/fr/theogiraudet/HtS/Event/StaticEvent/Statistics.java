@@ -383,7 +383,7 @@ public class Statistics implements Listener{
 	public void onLongShot(ProjectileHitEvent e) {
 		if(main.isState(HtSState.RUNNING)) {
 			if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && e.getHitEntity() != null) {
-				if(e.getHitEntity().getLocation().distance(((Entity) e.getEntity().getShooter()).getLocation()) > 49.0) {
+				if(e.getHitEntity().getLocation().distance(((Entity) e.getEntity().getShooter()).getLocation()) > 49) {
 					PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
 					int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot");
 					value++;
