@@ -27,7 +27,7 @@ import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Timer;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
-import fr.theogiraudet.HtS.Event.Statistics;
+import fr.theogiraudet.HtS.Event.StaticEvent.Statistics;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 import fr.theogiraudet.HtS.Objects.ScoreBoard;
 import fr.theogiraudet.HtS.Objects.Team;
@@ -66,7 +66,9 @@ public class Start implements CommandExecutor {
 
 			
 			if(main.isSyTState(ModState.OFF)) {
-				Bukkit.getWorld("world").setPVP(true);
+				for(World world : Bukkit.getWorlds()) {
+					world.setPVP(true);
+				}
 			}
 			
 			main.setState(HtSState.RUNNING);

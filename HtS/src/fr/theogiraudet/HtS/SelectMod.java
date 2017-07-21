@@ -13,7 +13,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 import fr.theogiraudet.HtS.Enumeration.ModState;
-import fr.theogiraudet.HtS.Event.Inventaire;
+import fr.theogiraudet.HtS.Event.Option.Inventaire;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
 
 public class SelectMod implements Listener {

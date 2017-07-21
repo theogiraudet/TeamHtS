@@ -21,7 +21,7 @@ import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.ScoreboardSign;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
-import fr.theogiraudet.HtS.Event.Inventaire;
+import fr.theogiraudet.HtS.Event.Option.Inventaire;
 import fr.theogiraudet.HtS.Objects.Randomizer;
 
 public class Commands implements CommandExecutor {

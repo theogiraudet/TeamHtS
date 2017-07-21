@@ -8,6 +8,8 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
+import org.bukkit.World;
+import org.bukkit.World.Environment;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,8 +22,8 @@ import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.EventManager;
 import fr.theogiraudet.HtS.Objects.PlayersInGame;
 import fr.theogiraudet.HtS.Objects.Team;
-import fr.theogiraudet.HtS.TaupeGun.TaupeGun;
 import fr.theogiraudet.SyT.SyT;
+import fr.theogiraudet.TaupeGun.TaupeGun;
 
 
 
@@ -46,13 +48,15 @@ public class HtS extends JavaPlugin {
 	@Override
 	public void onEnable()  {
 		
-		
-		Bukkit.getWorld("world").setDifficulty(Difficulty.HARD);
-		Bukkit.getWorld("world_nether").setDifficulty(Difficulty.HARD);
-		Bukkit.getWorld("world_the_end").setDifficulty(Difficulty.HARD);
-		System.out.println(Bukkit.getWorlds());
-		Bukkit.getWorld("world").setPVP(false);
-		Bukkit.getWorld("world").setSpawnLocation(0, 205, 0);
+		for(World world : Bukkit.getWorlds()) {
+			world.setDifficulty(Difficulty.HARD);
+			System.out.println(world.getName());
+			if(world.getEnvironment() == Environment.NORMAL) {
+				System.out.println("1");
+				world.setPVP(false);
+				world.setSpawnLocation(0, 205, 0);
+			}
+		}
 		Bukkit.setSpawnRadius(0);
 		this.setState(HtSState.WAIT);
 		this.setSyTState(ModState.OFF);

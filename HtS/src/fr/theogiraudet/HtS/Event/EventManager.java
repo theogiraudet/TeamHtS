@@ -6,12 +6,32 @@ import org.bukkit.plugin.PluginManager;
 import fr.theogiraudet.HtS.CustomCraft;
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Commands.TeamCommand;
+import fr.theogiraudet.HtS.Event.Option.CustomInventory;
+import fr.theogiraudet.HtS.Event.Option.CustomInventoryEvent;
+import fr.theogiraudet.HtS.Event.Option.Inventaire;
+import fr.theogiraudet.HtS.Event.Option.Test;
+import fr.theogiraudet.HtS.Event.Option.EnableItem.DiamondSword;
+import fr.theogiraudet.HtS.Event.Option.EnableItem.DisableCraft;
+import fr.theogiraudet.HtS.Event.Option.EnableItem.Sword;
+import fr.theogiraudet.HtS.Event.Option.Mobs.MobFixe;
+import fr.theogiraudet.HtS.Event.Option.Mobs.MobFriendEvent;
+import fr.theogiraudet.HtS.Event.Option.Mobs.NetherEvent;
+import fr.theogiraudet.HtS.Event.Option.Time.Border;
+import fr.theogiraudet.HtS.Event.Option.Time.DepthBreath;
+import fr.theogiraudet.HtS.Event.StaticEvent.ChangeRate;
+import fr.theogiraudet.HtS.Event.StaticEvent.CustomChat;
+import fr.theogiraudet.HtS.Event.StaticEvent.FakeDeath;
+import fr.theogiraudet.HtS.Event.StaticEvent.HeadShot;
+import fr.theogiraudet.HtS.Event.StaticEvent.JoinEvent;
+import fr.theogiraudet.HtS.Event.StaticEvent.NoHeal;
+import fr.theogiraudet.HtS.Event.StaticEvent.ShulkerShell;
+import fr.theogiraudet.HtS.Event.StaticEvent.Spectator;
+import fr.theogiraudet.HtS.Event.StaticEvent.Statistics;
+import fr.theogiraudet.HtS.Event.StaticEvent.Unclassifiable;
+import fr.theogiraudet.HtS.Event.StaticEvent.WaitState;
 import fr.theogiraudet.HtS.Objects.ItemStackManager;
-import fr.theogiraudet.HtS.Options.CustomInventoryEvent;
-import fr.theogiraudet.HtS.Options.Sword;
-import fr.theogiraudet.HtS.Options.Test;
-import fr.theogiraudet.HtS.TaupeGun.TaupeChannel;
 import fr.theogiraudet.SyT.SyT;
+import fr.theogiraudet.TaupeGun.TaupeChannel;
 
 public class EventManager {
 
@@ -41,10 +61,12 @@ public class EventManager {
 		pm.registerEvents(new TaupeChannel(htS), htS);
 		pm.registerEvents(new HeadShot(htS), htS);
 		pm.registerEvents(new CustomInventoryEvent(htS), htS);
-
 		pm.registerEvents(new Test(), htS);
-		pm.registerEvents(new Sword(new ItemStackManager(Material.DIAMOND_SWORD, (short) 0, 1, "Épée", "§2Activé", true)), htS);
 		pm.registerEvents(new CustomCraft(htS), htS);
+		
+		pm.registerEvents(new DiamondSword(new ItemStackManager(Material.DIAMOND_SWORD, (short) 0, 1, "§rÉpée en diamant", "§r§2Activé", true), CustomInventory.DISABLE), htS);
+		pm.registerEvents(new Sword(new ItemStackManager(Material.IRON_SWORD, (short) 0, 1, "§rÉpée", "§r§2Activé", true), CustomInventory.DISABLE), htS);
+
 	}
 
 }
