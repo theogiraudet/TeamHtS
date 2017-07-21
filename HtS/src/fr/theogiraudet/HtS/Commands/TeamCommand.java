@@ -59,15 +59,15 @@ public class TeamCommand implements CommandExecutor, Listener {
 
 			// && main.isState(HtSState.WAIT)
 			if (cmd.getName().equalsIgnoreCase("team") && sender.hasPermission("team.use")) {
-				if (args.length >= 4 && args[0].equalsIgnoreCase("add")) {
+				if (args.length >= 3 && args[0].equalsIgnoreCase("add")) {
 					for (Team i : main.teams) {
 						if (args[1].equalsIgnoreCase(i.getTeamName())) {
 							sender.sendMessage("§4Cette team existe déjà !");
 							return true;
 						}
 					}
-					System.out.println(args[1] + " " + args[2] + " " + args[3]);
-					main.teams.add(new Team(args[1], args[2].replace("&", "§"), Byte.parseByte(args[3]), main));
+					System.out.println(args[1] + " " + args[2] + " ");
+					main.teams.add(new Team(args[1], args[2].replace("&", "§"), main));
 					sender.sendMessage("§2Team ajoutée !");
 					main.recap.replace("§6Équipe : ", "§rOui");
 					return true;

@@ -148,13 +148,13 @@ public class Start implements CommandExecutor {
 		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 				ScoreBoard.sendScoreboard(p, main);
-				ScoreBoard.sendPlayers(main);
-				if(!main.teams.isEmpty()) {
-					ScoreBoard.sendTeams(main);
-				}
-				ScoreBoard.sendKills(main);
-				ScoreBoard.sendBorder(main);
 			}
+		ScoreBoard.sendPlayers(main);
+		if(!main.teams.isEmpty()) {
+			ScoreBoard.sendTeams(main);
+		}
+		ScoreBoard.sendKills(main);
+		ScoreBoard.sendBorder(main);
 		
 		
 		Timer chest = new Timer(main, "Chest", 180, 30, 60, 90, 120, 150);

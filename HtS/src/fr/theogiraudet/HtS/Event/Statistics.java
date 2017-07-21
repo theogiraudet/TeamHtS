@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -72,7 +73,7 @@ public class Statistics implements Listener{
 			add("Enchantement Fait:");
 			add("Pomme d'or:");
 			add("Potion Bue:");
-			add("Potion Lancée");
+			add("Potion Lancée:");
 			add("Joueur tué:");
 			add("Mob tué:");
 			add("Dégât Fait:");
@@ -196,7 +197,7 @@ public class Statistics implements Listener{
 		if(main.isState(HtSState.RUNNING)) {
 			PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
 			int value = (int) f.get(e.getPlayer().getDisplayName() + ".logout");
-			value = value++;
+			value++;
 			f.set(e.getPlayer().getDisplayName() + ".logout", value);
 			f.save();
 		}
@@ -238,7 +239,7 @@ public class Statistics implements Listener{
 				} else if (e.getBlock().getType() == Material.GOLD_ORE) {
 					PluginFile f = new PluginFile(main, e.getPlayer().getDisplayName() + ".txt");
 					int value = (int) f.get(e.getPlayer().getDisplayName() + ".gold");
-					value = value++;
+					value++;
 					f.set(e.getPlayer().getDisplayName() + ".gold", value);
 					f.save();
 				}
@@ -381,13 +382,13 @@ public class Statistics implements Listener{
 	@EventHandler
 	public void onLongShot(ProjectileHitEvent e) {
 		if(main.isState(HtSState.RUNNING)) {
-			if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player
-					&& e.getHitEntity() != null) {
-				if(e.getHitBlock().getLocation().distance(((Player) e.getEntity().getShooter()).getLocation()) >= 50) {
-				PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
-				int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot");
-				value++;
-				f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot", value);
+			if (e.getEntityType() == EntityType.ARROW && e.getEntity().getShooter() instanceof Player && e.getHitEntity() != null) {
+				if(e.getHitEntity().getLocation().distance(((Entity) e.getEntity().getShooter()).getLocation()) > 49.0) {
+					PluginFile f = new PluginFile(main, ((Player) e.getEntity().getShooter()).getDisplayName() + ".txt");
+					int value = (int) f.get(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot");
+					value++;
+					f.set(((Player) e.getEntity().getShooter()).getDisplayName() + ".arrow.longshot", value);
+					f.save();
 				}
 			}
 		}

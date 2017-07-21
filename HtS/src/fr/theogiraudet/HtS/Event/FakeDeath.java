@@ -61,12 +61,14 @@ public class FakeDeath implements Listener {
 					main.removeTeam(team);
 				}
 				if(main.teams.size() == 1) {
+					e.setDeathMessage("");
 					Bukkit.broadcastMessage("§2L'équipe " + main.getTeams().get(0).getTeamColor() + main.getTeams().get(0).getTeamName() + "§r§2 a gagné !");
 					main.setState(HtSState.FINISHING);
 					s.gameTime();
 					s.getStatistics();
 				}
 			} else if(main.teams.isEmpty() && main.players.getPlayersInGame().size() == 1) {
+				e.setDeathMessage("");
 				Bukkit.broadcastMessage("§2" + Bukkit.getPlayer(main.players.getPlayersInGame().get(0)).getName() + " a gagné !");
 				main.setState(HtSState.FINISHING);
 				s.gameTime();

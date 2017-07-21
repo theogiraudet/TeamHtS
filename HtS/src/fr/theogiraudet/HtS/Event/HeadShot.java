@@ -41,8 +41,8 @@ public class HeadShot implements Listener {
 					if(main.isState(HtSState.RUNNING)) {
 						PluginFile f = new PluginFile(main, ((Player) proj.getShooter()).getDisplayName() + ".txt");
 						int value = (int) f.get(((Player) proj.getShooter()).getDisplayName() + ".arrow.headshot");
-						value = value++;
-						f.set(((Player) proj.getShooter()).getDisplayName() + ".logout", value);
+						value++;
+						f.set(((Player) proj.getShooter()).getDisplayName() + ".arrow.headshot", value);
 						f.save();
 					}
 				}
