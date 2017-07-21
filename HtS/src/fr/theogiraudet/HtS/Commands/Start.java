@@ -20,6 +20,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 
 import fr.theogiraudet.HtS.HtS;
 import fr.theogiraudet.HtS.Timer;
@@ -56,12 +58,11 @@ public class Start implements CommandExecutor {
 			for (HashMap.Entry<String, String> entry : recap2.entrySet()) {
 				Bukkit.getServer().broadcastMessage(entry.getKey() + entry.getValue());
 			}
-			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule sendCommandFeedback false");
-			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives add §4\u2764 health");
-			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives setdisplay belowName §4\u2764");
-			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives add keurkeur health");
-			Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "scoreboard objectives setdisplay list keurkeur");
-
+			Objective belowHealth = HtS.b.registerNewObjective("belowHealth", "health");
+			Objective listHealth = HtS.b.registerNewObjective("listHealth", "health");
+			belowHealth.setDisplaySlot(DisplaySlot.BELOW_NAME);
+			belowHealth.setDisplayName("§4\u2764");
+			listHealth.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 			
 			if(main.isSyTState(ModState.OFF)) {
 				Bukkit.getWorld("world").setPVP(true);
@@ -102,7 +103,7 @@ public class Start implements CommandExecutor {
 					p.getInventory().clear();
 					p.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE, 1));
 					p.teleport(teleport());
-					
+					p.setScoreboard(HtS.b);
 				}
 			} else {
 				Statistics s = new Statistics(main);
@@ -121,6 +122,7 @@ public class Start implements CommandExecutor {
 						p.getInventory().clear();
 						p.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE, 1));
 						p.teleport(loc);
+						p.setScoreboard(HtS.b);
 					}
 				}
 			}
