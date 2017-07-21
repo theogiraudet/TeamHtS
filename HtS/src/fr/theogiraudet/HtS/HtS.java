@@ -19,6 +19,7 @@ import fr.theogiraudet.HtS.Commands.CommandManager;
 import fr.theogiraudet.HtS.Enumeration.HtSState;
 import fr.theogiraudet.HtS.Enumeration.ModState;
 import fr.theogiraudet.HtS.Event.EventManager;
+import fr.theogiraudet.HtS.LootTables.LootTables;
 import fr.theogiraudet.HtS.Objects.PlayersInGame;
 import fr.theogiraudet.HtS.Objects.Team;
 import fr.theogiraudet.SyT.SyT;

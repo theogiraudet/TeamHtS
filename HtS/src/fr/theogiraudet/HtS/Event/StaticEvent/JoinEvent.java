@@ -20,8 +20,6 @@ public class JoinEvent implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		System.out.println("Rt");
-		System.out.println(main.getTeams());
 		Player p = e.getPlayer();
 		if (main.isState(HtSState.WAIT)) {
 			p.setGameMode(GameMode.ADVENTURE);

@@ -1,4 +1,4 @@
-package fr.theogiraudet.HtS;
+package fr.theogiraudet.HtS.LootTables;
 
 import java.io.File;
 import java.io.FileOutputStream;
