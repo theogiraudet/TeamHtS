@@ -50,9 +50,9 @@ public class HtS extends JavaPlugin {
 		
 		for(World world : Bukkit.getWorlds()) {
 			world.setDifficulty(Difficulty.HARD);
-			System.out.println(world.getName());
+			//System.out.println(world.getName());
 			if(world.getEnvironment() == Environment.NORMAL) {
-				System.out.println("1");
+				//System.out.println("1");
 				world.setPVP(false);
 				world.setSpawnLocation(0, 205, 0);
 			}
@@ -69,10 +69,10 @@ public class HtS extends JavaPlugin {
 		border.setCenter(0.0, 0.0);
 		border.setSize(1000);
 		
+		LootTables.loadLootTables();
 		EventManager.loadEvents(this);
 		CommandManager.loadCommands(this);
 		CustomCraft.loadCrafts(this);
-		
 }
 
 	public void onDisable() {
