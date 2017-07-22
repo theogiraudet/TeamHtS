@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentOffer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.event.inventory.BrewEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
@@ -20,7 +21,14 @@ public class DisableCraft implements Listener {
 
 	public static List<ItemStack> craft = new ArrayList<ItemStack>();
 	public static List<ItemStack> disableIngredient = new ArrayList<ItemStack>();
-
+	@SuppressWarnings("serial")
+	private ArrayList<Enchantment> disabledEnchant = new ArrayList<Enchantment>() {
+		{
+			add(Enchantment.FIRE_ASPECT);
+			add(Enchantment.ARROW_FIRE);
+		}
+	};
+	
 	public DisableCraft(HtS htS) {
 		htS = main;
 	}
@@ -34,22 +42,17 @@ public class DisableCraft implements Listener {
 			}
 		}
 	}
-
+	
 	@EventHandler
-	public void onEnchantItem(EnchantItemEvent e) {
-		System.out.println("a");
-		for (ItemStack item : craft) {
-			System.out.println(item);
-			if (item.getType().equals(Material.ENCHANTED_BOOK)) {
-				System.out.println("b");
-				if (e.getEnchantsToAdd().containsKey(Enchantment.ARROW_FIRE)|| e.getEnchantsToAdd().containsKey(Enchantment.FIRE_ASPECT)) {
-					System.out.println("c");
-					e.setCancelled(true);
-				}
+	public void onEnchantItem(PrepareItemEnchantEvent e) {
+		EnchantmentOffer[] offers = e.getOffers();
+		for (int i = 0; i < 3; i++) {
+			if (disabledEnchant.contains(offers[i].getEnchantment())) {
+				offers[i].setEnchantment(Enchantment.DURABILITY);
 			}
 		}
 	}
-
+	
 	@EventHandler
 	public void onBrewItem(BrewEvent e) {
 		Material m = e.getContents().getIngredient().getType();
