@@ -49,8 +49,7 @@ public class MobFriendEvent implements Listener{
 			if (e.getPlayer().getItemInHand().getType() == Material.MONSTER_EGG
 					&& e.getItem().getItemMeta().hasDisplayName() && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				e.setCancelled(true);
-				Entity mob = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(),
-						EntityType.fromName(e.getItem().getItemMeta().getDisplayName().split(": ")[1]));
+				Entity mob = e.getPlayer().getWorld().spawnEntity(e.getPlayer().getLocation(), EntityType.fromName(e.getItem().getItemMeta().getDisplayName().split(": ")[1]));
 				mob.setCustomNameVisible(false);
 				mob.setCustomName(main.getTeam(e.getPlayer()).getTeamName());
 				e.getPlayer().getItemInHand().setAmount(e.getPlayer().getItemInHand().getAmount() - 1);
@@ -69,10 +68,7 @@ public class MobFriendEvent implements Listener{
 				if (Randomizer.RandRate(10)) {
 					ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 					drops.add(new ItemStackManager(Material.MONSTER_EGG, e.getEntityType().getTypeId(), 1,
-							ChatColor.GREEN + main.getTeam(e.getEntity().getKiller()).getTeamName()
-									+ " a un appel à un : " + e.getEntity().getName(),
-							"Fait apparaître un monstre qui combattra à vos côtés (il ne vous suivera pas).")
-									.getItemStack());
+					ChatColor.GREEN + main.getTeam(e.getEntity().getKiller()).getTeamName() + " a un appel à un : " + e.getEntity().getName(), "Fait apparaître un monstre qui combattra à vos côtés (il ne vous suivera pas).").getItemStack());
 					e.getDrops().addAll(drops);
 				}
 			}
